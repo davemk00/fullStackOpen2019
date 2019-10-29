@@ -1,0 +1,10 @@
+title 0.6 New Note Creation Sequence (single page app)
+
+note left of Browser: user clicks form button\nonsubmit function called
+note over Browser: content retrieved from form,\npushed to notes array,\nnote list rerendered
+
+Browser->Server: HTTP POST request with JSON data type\nhttps://fullstack-exampleapp.herokuapp.com/new_note_spa
+note over Server: adds new notes to notes array
+
+Server-->Browser: HTTP status code 201\n"note created"
+

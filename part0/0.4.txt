@@ -1,0 +1,22 @@
+title 0.4 New Note Creation Sequence (old school method)
+
+note left of Browser: user clicks form button
+Browser->Server: HTTP POST request https://fullstack-exampleapp.herokuapp.com/new_note
+note over Server: Server creates new bote object
+note over Server: adds new object to "notes" array
+
+Server-->Browser: HTTP status code 302
+
+Browser->Server: HTTP GET request https://fullstack-exampleapp.herokuapp.com/notes
+Server-->Browser: HTML-code
+Browser->Server: HTTP GET request https://fullstack-exampleapp.herokuapp.com/main.css
+Server-->Browser: main.css
+Browser->Server: HTTP GET request https://fullstack-exampleapp.herokuapp.com/main.js
+Server-->Browser: main.js
+
+note over Browser: browser executes js-code\nthat requests JSON data from server 
+
+Browser->Server: HTTP GET request https://fullstack-exampleapp.herokuapp.com/data.json
+Server-->Browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
+
+note over Browser: event handler triggered and HTML rerendered

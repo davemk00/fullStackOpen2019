@@ -1,0 +1,16 @@
+title 0.5 Single Page app
+
+Browser->Server: HTTP GET request https://fullstack-exampleapp.herokuapp.com/notes
+Server-->Browser: HTML-code
+Browser->Server: HTTP GET request https://fullstack-exampleapp.herokuapp.com/main.css
+Server-->Browser: main.css
+Browser->Server: HTTP GET request https://fullstack-exampleapp.herokuapp.com/spa.js
+Server-->Browser: spa.js
+
+note over Browser: browser starts to execute spa.js to render the page\nincluding an async requests for JSON data from server
+
+Browser->Server: HTTP GET request https://fullstack-exampleapp.herokuapp.com/data.json
+Server-->Browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
+
+note over Browser: event handler renders received notes to page
+
