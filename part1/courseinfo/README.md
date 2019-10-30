@@ -9,3 +9,5 @@ I put the "Number of exercises" text in the Total component too.
 **Second Commit** - step 2 - refactor to include \<Part ...
 
 **Third Commit** - step 3 - changes to variables
+
+**Fourth Commit** - step 4 - passing variables as Array
