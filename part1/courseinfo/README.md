@@ -11,3 +11,5 @@ I put the "Number of exercises" text in the Total component too.
 **Third Commit** - step 3 - changes to variables
 
 **Fourth Commit** - step 4 - passing variables as Array
+
+**Fifth Commit** - step 5 - pass variables as object
