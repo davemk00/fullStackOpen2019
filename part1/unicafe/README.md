@@ -34,6 +34,13 @@ refactored calculating positive and average
 
 
 
+**Sixth Commit** - uniface step6
+
+Statistics in a table
+
+
+
+
 
 
 
