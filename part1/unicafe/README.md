@@ -11,3 +11,11 @@ Adding more statistics
 It is done in a simple way, but should be refactored to use 'Total' variable to make cleaner
 
 
+**Third Commit** - uniface step3
+
+Moved statistics into its own component
+new 'all' const to make maths cleaner
+I suppose I could use some maths functions/methods
+
+
+
