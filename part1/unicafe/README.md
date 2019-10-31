@@ -27,6 +27,15 @@ Added 'no feedback given' routine
 
 
 
+**Fifth Commit** - uniface step5
+
+Added Statistic component
+refactored calculating positive and average
+
+
+
+
+
 
 
 

@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom'
 
 const Statistics = (props) => {
   const { good, neutral, bad } = props
+
   const all = good + neutral + bad
+  const average = (good - bad)/(all)
+  const positive = good/all*100 + '%'
 
   // notify if no feedback given yet
   if (all==0) {
@@ -17,12 +20,20 @@ const Statistics = (props) => {
   // feedbackc list
   return (
     <div>
-      <p>good {good} </p>
-      <p>neutral {neutral} </p>
-      <p>bad {bad} </p>
-      <p>all {all} </p>
-      <p>average {(good - bad)/(all)}</p>
-      <p>positive {good/all*100} %</p>
+      <Statistic text = "good" value = {good} />
+      <Statistic text = "neutral" value = {neutral} />
+      <Statistic text = "bad" value = {bad} />
+      <Statistic text = "all" value = {all} />
+      <Statistic text = "average" value = {average} />
+      <Statistic text = "positive" value = {positive} />
+    </div>
+  )
+}
+
+const Statistic = ({text, value}) => {
+  return (
+    <div>
+      <p>{text} {value}</p>
     </div>
   )
 }
