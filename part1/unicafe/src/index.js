@@ -5,6 +5,16 @@ const Statistics = (props) => {
   const { good, neutral, bad } = props
   const all = good + neutral + bad
 
+  // notify if no feedback given yet
+  if (all==0) {
+    return (
+      <div>
+        No feedback given
+      </div>
+    )
+  }
+
+  // feedbackc list
   return (
     <div>
       <p>good {good} </p>
@@ -12,15 +22,12 @@ const Statistics = (props) => {
       <p>bad {bad} </p>
       <p>all {all} </p>
       <p>average {(good - bad)/(all)}</p>
-      <p>positive {good/(all)*100} %</p>
+      <p>positive {good/all*100} %</p>
     </div>
   )
 }
 
-
-
-
-    
+  
 const App = () => {
   // save clicks of each button to own state
   const [good, setGood] = useState(0)
