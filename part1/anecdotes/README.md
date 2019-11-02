@@ -5,3 +5,9 @@
 Adding a button to present a random anecdote
 
 
+**Second Commit** - 1.13* Anecdotes step2
+
+Added vote button
+Created vote component
+
+

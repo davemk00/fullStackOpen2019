@@ -1,16 +1,50 @@
+// Full Stack Open 2019
+// WIP 1.13*
+
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
+    {text}
+  </button>
+)
+
 const App = (props) => {
+  // Anecdotes vars and selection
   const [selected, setSelected] = useState(0)
+  const numAnecdotes = anecdotes.length
+  const selectRandomAnecdote = () => {
+    setSelected(Math.floor(Math.random() * numAnecdotes))
+  }
+  
+  // Votes cars and updating
+  const [votes, setVotes] = useState(Array(numAnecdotes).fill(0))
+  const addVote = (selected) => {
+    const copyVotes = [...votes]
+    copyVotes[selected] += 1
+    setVotes(copyVotes)
+  }
 
   return (
     <div>
       {props.anecdotes[selected]}
       <br />
-      <button onClick={() => setSelected(Math.floor(Math.random()*6))}>
-        Click Me
-      </button>
+
+      has {votes[selected]} votes
+      <br />
+
+      <Button 
+        onClick = {selectRandomAnecdote}
+        text = 'Click Me for next quote'
+      />
+
+      <br />
+      <Button 
+        onClick = {() => addVote(selected)}
+        text = 'Vote for current quote'
+      />
+
     </div>
   )
 }
