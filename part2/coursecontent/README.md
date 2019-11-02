@@ -16,3 +16,11 @@
 **Commit 3** - Part 2.4 Course Content step9
 
 - Refactored to allow arbitrary number of courses
+
+
+**Commit 4** - Part 2.5 Course Content step10
+
+- Separated modules
+  - index.js
+    - ./App.js
+      - ./component/Components.js
