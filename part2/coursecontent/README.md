@@ -8,6 +8,11 @@
 - refacted to use map so any number of rows can be rendered
 
 
-**Commit 2** - Part 2.2 Course Content step7
+**Commit 2** - Part 2.2 & 2.3 Course Content step7 & step8
 
 - Added total component using reduce method
+
+
+**Commit 3** - Part 2.4 Course Content step9
+
+- Refactored to allow arbitrary number of courses
