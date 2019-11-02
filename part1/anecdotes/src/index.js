@@ -1,5 +1,5 @@
 // Full Stack Open 2019
-// WIP 1.13*
+// WIP 1.14*
 
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
@@ -28,6 +28,7 @@ const App = (props) => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1> 
       {props.anecdotes[selected]}
       <br />
 
@@ -35,15 +36,20 @@ const App = (props) => {
       <br />
 
       <Button 
+        onClick = {() => addVote(selected)}
+        text = 'Vote for current quote'
+      />
+      <Button 
         onClick = {selectRandomAnecdote}
         text = 'Click Me for next quote'
       />
 
+      <h1>Anecdote with most votes</h1>
+      {props.anecdotes[votes.indexOf(Math.max(...votes))]}
       <br />
-      <Button 
-        onClick = {() => addVote(selected)}
-        text = 'Vote for current quote'
-      />
+      has {Math.max(...votes)} votes
+      <br />
+      
 
     </div>
   )

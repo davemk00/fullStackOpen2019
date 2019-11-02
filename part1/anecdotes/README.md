@@ -11,3 +11,8 @@ Added vote button
 Created vote component
 
 
+**Third Commit** - 1.14* Anecdotes step3
+
+Added headings
+Added maximum quote and stats
+
