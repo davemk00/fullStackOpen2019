@@ -5,8 +5,8 @@ const Statistics = (props) => {
   const { good, neutral, bad } = props
 
   const all = good + neutral + bad
-  const average = (good - bad)/(all)
-  const positive = good/all*100 + '%'
+  const average = ((good - bad)/(all)).toFixed(2)
+  const positive = (good/all*100).toFixed(2)  + '%'
 
   // notify if no feedback given yet
   if (all===0) {

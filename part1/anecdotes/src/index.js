@@ -48,8 +48,6 @@ const App = (props) => {
       {props.anecdotes[votes.indexOf(Math.max(...votes))]}
       <br />
       has {Math.max(...votes)} votes
-      <br />
-      
 
     </div>
   )

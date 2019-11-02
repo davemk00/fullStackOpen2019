@@ -4,7 +4,7 @@ https://fullstackopen.com/en/
 
 Completed:
 - [part0](part0)
-- [part1.1](part1)
+- [part1](part1)
 
 Submitted:
-- Nil (yet)
+- [part0](part0)
