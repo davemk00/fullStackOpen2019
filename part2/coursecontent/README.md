@@ -1,6 +1,13 @@
-## Part 2 Submission
+## Part 2 Course Content
 
-2.1-2.5 [coursecontent](coursecontent)
-        - Used my submission for 1.5 as the origin
 
-2.6-2.20 [thephonebook](thephonebook)
+**Commit 1** - Part 2.1 Course Content step6
+
+- Used my submission for 1.5 as the origin
+- deconstructed all variables
+- refacted to use map so any number of rows can be rendered
+
+
+**Commit 2** - Part 2.2 Course Content step7
+
+- Added total component using reduce method
