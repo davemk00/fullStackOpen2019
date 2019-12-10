@@ -19,7 +19,10 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault()
     const person = { name: newName }
-    setPersons(persons.concat(person))
+    const checkExists = persons.findIndex(person => person.name.toLowerCase() === newName.toLowerCase())
+    checkExists > -1
+      ? window.alert(`${person.name} is already in the phone book`)
+      : setPersons(persons.concat(person))
     setNewName('')
   }
 
