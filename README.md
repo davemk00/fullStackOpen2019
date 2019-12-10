@@ -6,7 +6,8 @@ Started:
 - [part2](part2)
 
 Completed:
-- [part1](part1)
+
 
 Submitted:
+- [part1](part1)
 - [part0](part0)
