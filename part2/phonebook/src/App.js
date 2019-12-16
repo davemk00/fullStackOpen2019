@@ -1,4 +1,8 @@
 import React, { useState } from 'react'
+import AddPersonForm from './components/AddPersonForm.js'
+import Rows from './components/Rows.js'
+import Filter from './components/Filter.js'
+
 
 const App = () => {
   const [ persons, setPersons] = useState([
@@ -12,12 +16,7 @@ const App = () => {
   const [ filterTerm, setFilterTerm ] = useState('')
 
 
-  const rows = () => persons
-    .filter(person => 
-      person.name.toLowerCase().indexOf(filterTerm.toLowerCase()) > -1 )  // tried .includes, but couldn't get it to work
-    .map(person => (
-      <p key={person.name}>{person.name} {person.number} </p>
-    ))
+
 
 
   const handleNameChange = (event) => {setNewName(event.target.value)}
@@ -40,37 +39,19 @@ const App = () => {
     <div>
 
       <h2>Phonebook</h2>
-
-      <form>
-        <div>
-          Filter names shown with <input onChange={handleFilterChange} />
-        </div>
-      </form>
+      <Filter handleFilterChange = {handleFilterChange} />
 
       <h2>Add a new name and number</h2>
-
-      <form onSubmit={addPerson}>
-        <div>
-          Name: <input 
-            value = {newName}
-            onChange={handleNameChange}
-          />
-        </div>
-        <div>
-          Number: <input 
-            value = {newNumber}
-            onChange={handleNumberChange}
-          />
-        </div>
-
-
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <AddPersonForm
+        addPerson = {addPerson}
+        newName = {newName}
+        handleNameChange = {handleNameChange}
+        newNumber = {newNumber}
+        handleNumberChange = {handleNumberChange}
+      />
 
       <h2>Numbers</h2>
-      {rows()}
+      <Rows persons={persons} filterTerm={filterTerm} />
 
     </div>
   )
