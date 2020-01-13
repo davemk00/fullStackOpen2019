@@ -1,8 +1,11 @@
 import React from 'react'
 
-const Rows = ({ items , filterTerm }) => {
+const Rows = ({ items , filterTerm , setFilterTerm }) => {
   if (items.length === 0) {
-    return <p>No country matching search term</p>
+    return <div>    
+      <span>No country matching search term</span>
+    </div>
+
   }
   if (items.length>10) {
     return <p>More than 10 countries returned, refine search</p>
@@ -15,7 +18,7 @@ const Rows = ({ items , filterTerm }) => {
         <h1>{items[0].name}</h1>
         <p>Capital: {items[0].capital}</p>
         <p>Population: {items[0].population}</p>
-        <h2>Languages</h2>
+        <h2>Languages: </h2>
         <ul>
           {
             items[0].languages.map(lang => {
@@ -30,9 +33,14 @@ const Rows = ({ items , filterTerm }) => {
 
   return (
     <div>
-          {items.map(item => {
-            return <p key={item.name}>{item.name} {item.number} </p>
-          })}
+        {items.map(item => {
+          return (
+            <div>
+              <span key={item.name}>{item.name} {item.number} </span>
+              <button onClick={() => setFilterTerm(item.name)}>Show</button>
+            </div>
+          )
+        })}
     </div>
   )
 }

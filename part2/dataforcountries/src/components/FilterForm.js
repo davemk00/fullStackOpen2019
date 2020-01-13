@@ -1,9 +1,10 @@
 import React from 'react'
 
-const FilterForm = ({filterTerm , handleFilterChange }) => (
+const FilterForm = ({filterTerm , setFilterTerm , handleFilterChange }) => (
   <form>
     <div>
-      Filter with <input value={filterTerm} onChange={handleFilterChange} />
+      Filter with <input id='filterTerm' value={filterTerm} onChange={handleFilterChange} />
+      <button onClick={() => setFilterTerm('')}>Clear</button>
     </div>
   </form>
 )

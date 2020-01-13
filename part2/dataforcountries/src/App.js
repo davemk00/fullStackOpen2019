@@ -5,8 +5,7 @@ import FilterForm from './components/FilterForm.js'
 
 function App() {
   const [countries, setCountries] = useState([])
-  const [filterTerm, setFilterTerm] = useState('iraq')
-  const [searchResults, setSearchResults] = useState([])
+  const [filterTerm, setFilterTerm] = useState('')
 
   const hook = () => {
     axios
@@ -31,8 +30,8 @@ function App() {
   return (
     <div>
       <h2>Find Countries</h2>
-      <FilterForm handleFilterChange={handleFilterChange} />
-      <Rows items={countriesFiltered} filterTerm={filterTerm} />
+      <FilterForm handleFilterChange={handleFilterChange} setFilterTerm={setFilterTerm} />
+      <Rows items={countriesFiltered} filterTerm={filterTerm} setFilterTerm={setFilterTerm}/>
     </div>
   )
 }
