@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Rows from './components/Rows.js'
+import DisplayCountries from './components/DisplayCountries.js'
 import FilterForm from './components/FilterForm.js'
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
     <div>
       <h2>Find Countries</h2>
       <FilterForm handleFilterChange={handleFilterChange} setFilterTerm={setFilterTerm} />
-      <Rows items={countriesFiltered} filterTerm={filterTerm} setFilterTerm={setFilterTerm}/>
+      <DisplayCountries items={countriesFiltered} filterTerm={filterTerm} setFilterTerm={setFilterTerm}/>
     </div>
   )
 }
