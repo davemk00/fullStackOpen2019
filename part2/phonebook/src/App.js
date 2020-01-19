@@ -14,7 +14,6 @@ const App = () => {
   const [ filterTerm, setFilterTerm ] = useState('')
 
   const hook = () => {
-    console.log('effect')
     axios
       .get('http://localhost:3001/persons')
       .then(response =>{
@@ -35,11 +34,20 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
-    const person = { name: newName, number: newNumber }
+    const person = { 
+      name: newName, 
+      number: newNumber 
+    }
     const checkExists = persons.findIndex(person => person.name.toLowerCase() === newName.toLowerCase())
     checkExists > -1
       ? window.alert(person.name + ' is already in the phone book')
-      : setPersons(persons.concat(person))
+      : (axios
+          .post('http://localhost:3001/persons', person)
+          .then(response => {
+            console.log(response)},
+            setPersons(persons.concat(person))
+          )
+        )
     setNewName('')
     setNewNumber('')
   }
