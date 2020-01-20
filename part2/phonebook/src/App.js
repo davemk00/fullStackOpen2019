@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AddPersonForm from './components/AddPersonForm.js'
-import Rows from './components/Rows.js'
+//import Rows from './components/Rows.js'
 import Filter from './components/Filter.js'
 
 import personService from './services/persons'
@@ -16,7 +16,6 @@ const App = () => {
     personService
       .getAll()
       .then(initPersons =>{
-        console.log(initPersons.data)
         setPersons(initPersons.data)
       })
     },[])
@@ -27,6 +26,7 @@ const App = () => {
   const handleNumberChange = (event) => {setNewNumber(event.target.value)}
   const handleFilterChange = (event) => {setFilterTerm(event.target.value)}
 
+  const checkExists = persons.findIndex(person => person.name.toLowerCase() === newName.toLowerCase())
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -36,8 +36,6 @@ const App = () => {
       number: newNumber 
     }
     console.log(person)
-    const checkExists = persons.findIndex(person => person.name.toLowerCase() === newName.toLowerCase())
-    console.log(checkExists)
     checkExists > -1
       ? window.alert(person.name + ' is already in the phone book')
       : (personService
@@ -50,6 +48,28 @@ const App = () => {
     setNewName('')
     setNewNumber('')
   }
+
+  const deletePerson = (id) => {
+    console.log(id)
+    window.confirm(`Are you sure you want to delete ${id}`)
+      ? personService.remove(id)
+        .then(() => {
+          setPersons([...persons.filter(p => p.id !== id)])
+        }) 
+      : console.log(`Not removed entry id: ${id}`)
+  }
+
+  const Rows = ({ persons , filterTerm }) => 
+  persons
+    .filter(person => 
+      person.name.toLowerCase().indexOf(filterTerm.toLowerCase()) > -1 )  // tried .includes, but couldn't get it to work
+    .map(person => (
+      <p key={person.name}>{person.name} {person.number} 
+        <button onClick={() => 
+          deletePerson(person.id)
+        }>delete</button>
+      </p>
+    ))
 
   return (    
     <div>
