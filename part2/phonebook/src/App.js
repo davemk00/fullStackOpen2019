@@ -21,7 +21,6 @@ const App = () => {
     },[])
 
 
-
   const handleNameChange = (event) => {setNewName(event.target.value)}
   const handleNumberChange = (event) => {setNewNumber(event.target.value)}
   const handleFilterChange = (event) => {setFilterTerm(event.target.value)}
@@ -35,9 +34,23 @@ const App = () => {
       name: newName, 
       number: newNumber 
     }
-    console.log(person)
+    
+    const personUpdatedId = persons[checkExists].id
+    
     checkExists > -1
-      ? window.alert(person.name + ' is already in the phone book')
+      ? window.confirm(`${person.name} is already in the phonebook, update number?`)
+        ? personService
+            .update(personUpdatedId, person)
+            .then(
+              response => {
+                console.log(response)
+                console.log(`updating id: ${personUpdatedId}`)
+                setPersons(
+                  persons.map(p => (p.id !== personUpdatedId ? p : person))
+                )
+              }
+            )
+        : console.log(`${person.name} not updated`)
       : (personService
           .create(person)
           .then(response => 

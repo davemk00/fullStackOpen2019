@@ -9,12 +9,14 @@
 
 **Commit 4** - Part 2.9 The Phonebook Step4
 
-**Commit 4** - Part 2.10 The Phonebook Step5
+**Commit 5** - Part 2.10 The Phonebook Step5
 
-**Commit 5** - Part 2.11 The Phonebook Step6
+**Commit 6** - Part 2.11 The Phonebook Step6
 
-**Commit 6** - Part 2.15 phonebook Step7
+**Commit 7** - Part 2.15 phonebook Step7
 
-**Commit 7** - Part 2.16 phonebook Step8
+**Commit 8** - Part 2.16 phonebook Step8
 
-**Commit 8** - Part 2.17 phonebook Step9
+**Commit 9** - Part 2.17 phonebook Step9
+
+**Commit 10** - Part 2.18* phonebook Step10

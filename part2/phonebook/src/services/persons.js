@@ -11,6 +11,11 @@ const create = person => {
   return axios.post(baseURL, person)
 }
 
+const update = ( id,  person) => {
+  console.log('Updating number of ' + person.name + ' in database')
+  return axios.put(baseURL + id, person)
+}
+
 const remove = ( id ) => {
   console.log('removing ' + id + ' from database')
   console.log(baseURL + id)
@@ -20,5 +25,6 @@ const remove = ( id ) => {
 export default {
   getAll,
   create,
+  update,
   remove
 }
