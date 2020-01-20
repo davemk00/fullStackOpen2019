@@ -14,3 +14,5 @@
 **Commit 5** - Part 2.11 The Phonebook Step6
 
 **Commit 6** - Part 2.15 phonebook Step7
+
+**Commit 7** - Part 2.16 phonebook Step8

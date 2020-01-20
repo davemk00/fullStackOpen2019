@@ -3,8 +3,7 @@ import AddPersonForm from './components/AddPersonForm.js'
 import Rows from './components/Rows.js'
 import Filter from './components/Filter.js'
 
-import axios from 'axios'
-
+import personService from './services/persons'
 
 const App = () => {
 
@@ -13,17 +12,14 @@ const App = () => {
   const [ newNumber, setNewNumber ] = useState('')
   const [ filterTerm, setFilterTerm ] = useState('')
 
-  const hook = () => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response =>{
-        console.log(response.data)
-        setPersons(response.data)
-      }
-    )
-  }
-  
-  useEffect(hook, [])
+  useEffect(() => {
+    personService
+      .getAll()
+      .then(initPersons =>{
+        console.log(initPersons.data)
+        setPersons(initPersons.data)
+      })
+    },[])
 
 
 
@@ -34,17 +30,20 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
+    console.log(persons)
     const person = { 
       name: newName, 
       number: newNumber 
     }
+    console.log(person)
     const checkExists = persons.findIndex(person => person.name.toLowerCase() === newName.toLowerCase())
+    console.log(checkExists)
     checkExists > -1
       ? window.alert(person.name + ' is already in the phone book')
-      : (axios
-          .post('http://localhost:3001/persons', person)
-          .then(response => {
-            console.log(response)},
+      : (personService
+          .create(person)
+          .then(response => 
+            {console.log(response)},
             setPersons(persons.concat(person))
           )
         )
