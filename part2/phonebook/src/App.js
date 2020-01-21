@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import AddPersonForm from './components/AddPersonForm.js'
-//import Rows from './components/Rows.js'
 import Filter from './components/Filter.js'
-
 import personService from './services/persons'
+import './index.css'
+
+const Notification =({ message }) => {
+  if (message === null) {
+    return null
+  }
+  
+  return (
+    <div className = "msg">
+      {message}
+    </div>
+  )
+}
 
 const App = () => {
 
@@ -11,12 +22,13 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ filterTerm, setFilterTerm ] = useState('')
+  const [ message, setMessage ] = useState(null)
 
   useEffect(() => {
     personService
       .getAll()
-      .then(initPersons =>{
-        setPersons(initPersons.data)
+      .then(response => {
+        setPersons(response.data)
       })
     },[])
 
@@ -25,18 +37,19 @@ const App = () => {
   const handleNumberChange = (event) => {setNewNumber(event.target.value)}
   const handleFilterChange = (event) => {setFilterTerm(event.target.value)}
 
-  const checkExists = persons.findIndex(person => person.name.toLowerCase() === newName.toLowerCase())
-
   const addPerson = (event) => {
     event.preventDefault()
     console.log(persons)
     const person = { 
       name: newName, 
-      number: newNumber 
+      number: newNumber
     }
+
+    const checkExists = persons.findIndex(person => person.name.toLowerCase() === newName.toLowerCase())
+    let personUpdatedId = -1
     
-    const personUpdatedId = persons[checkExists].id
-    
+    if (checkExists > -1) {personUpdatedId = persons[checkExists].id} 
+
     checkExists > -1
       ? window.confirm(`${person.name} is already in the phonebook, update number?`)
         ? personService
@@ -44,7 +57,8 @@ const App = () => {
             .then(
               response => {
                 console.log(response)
-                console.log(`updating id: ${personUpdatedId}`)
+                setMessage(`${person.name} updated`)
+                setTimeout(() => {setMessage(null)}, 5000)                
                 setPersons(
                   persons.map(p => (p.id !== personUpdatedId ? p : person))
                 )
@@ -53,18 +67,20 @@ const App = () => {
         : console.log(`${person.name} not updated`)
       : (personService
           .create(person)
-          .then(response => 
-            {console.log(response)},
-            setPersons(persons.concat(person))
-          )
+          .then(response => {
+            console.log(response.data)
+            setPersons(persons.concat(response.data))
+            setMessage(`${person.name} added`)
+            setTimeout(() => {setMessage(null)}, 5000)
+          })
         )
     setNewName('')
     setNewNumber('')
   }
 
-  const deletePerson = (id) => {
+  const deletePerson = ( name, id ) => {
     console.log(id)
-    window.confirm(`Are you sure you want to delete ${id}`)
+    window.confirm(`Are you sure you want to delete ${name} (id: ${id})`)
       ? personService.remove(id)
         .then(() => {
           setPersons([...persons.filter(p => p.id !== id)])
@@ -78,8 +94,9 @@ const App = () => {
       person.name.toLowerCase().indexOf(filterTerm.toLowerCase()) > -1 )  // tried .includes, but couldn't get it to work
     .map(person => (
       <p key={person.name}>{person.name} {person.number} 
-        <button onClick={() => 
-          deletePerson(person.id)
+        <button onClick={() => {
+          console.log(person)
+          deletePerson( person.name, person.id )}
         }>delete</button>
       </p>
     ))
@@ -98,6 +115,8 @@ const App = () => {
         newNumber = {newNumber}
         handleNumberChange = {handleNumberChange}
       />
+
+      <Notification message={message} />
 
       <h2>Numbers</h2>
       <Rows persons={persons} filterTerm={filterTerm} />
