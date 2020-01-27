@@ -45,14 +45,16 @@ const App = () => {
       number: newNumber
     }
 
+    //Check that the person is already in the list 
     const checkExists = persons.findIndex(person => person.name.toLowerCase() === newName.toLowerCase())
     let personUpdatedId = -1
     
+    // get the id of the person should it exist, else index remains as -1
     if (checkExists > -1) {personUpdatedId = persons[checkExists].id} 
 
-    checkExists > -1
-      ? window.confirm(`${person.name} is already in the phonebook, update number?`)
-        ? personService
+    checkExists > -1    // If the person already exists
+      ? window.confirm(`${person.name} is already in the phonebook, update number?`)  // ask for confirmation to update
+        ? personService   // Update
           .update(personUpdatedId, person)
           .then(
             response => {
@@ -64,7 +66,7 @@ const App = () => {
               )
             }
           )
-          .catch(error => {
+          .catch(error => {   // promise catch
             setMessage(`The name '${person.name}' was already deleted from the server`)
             setTimeout(() => {setMessage(null)}, 5000) 
             
@@ -75,8 +77,9 @@ const App = () => {
             })
           })
 
-        : console.log(`${person.name} not updated`)
-      : (personService
+        : console.log(`${person.name} not updated`)  // Some other error??
+      
+      : (personService  // If the person doesn't exist already then create
           .create(person)
           .then(response => {
             console.log(response.data)
