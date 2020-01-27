@@ -53,17 +53,28 @@ const App = () => {
     checkExists > -1
       ? window.confirm(`${person.name} is already in the phonebook, update number?`)
         ? personService
-            .update(personUpdatedId, person)
-            .then(
-              response => {
-                console.log(response)
-                setMessage(`${person.name} updated`)
-                setTimeout(() => {setMessage(null)}, 5000)                
-                setPersons(
-                  persons.map(p => (p.id !== personUpdatedId ? p : person))
-                )
-              }
-            )
+          .update(personUpdatedId, person)
+          .then(
+            response => {
+              console.log(response)
+              setMessage(`${person.name} updated`)
+              setTimeout(() => {setMessage(null)}, 5000)                
+              setPersons(
+                persons.map(p => (p.id !== personUpdatedId ? p : person))
+              )
+            }
+          )
+          .catch(error => {
+            setMessage(`The name '${person.name}' was already deleted from the server`)
+            setTimeout(() => {setMessage(null)}, 5000) 
+            
+            personService
+            .getAll()
+            .then(response => {
+              setPersons(response.data)
+            })
+          })
+
         : console.log(`${person.name} not updated`)
       : (personService
           .create(person)
@@ -93,12 +104,14 @@ const App = () => {
     .filter(person => 
       person.name.toLowerCase().indexOf(filterTerm.toLowerCase()) > -1 )  // tried .includes, but couldn't get it to work
     .map(person => (
-      <p key={person.name}>{person.name} {person.number} 
-        <button onClick={() => {
+      <tr key={person.name}>
+        <th>{person.name}</th><th>{person.number}</th><th>
+        <button onClick={() => { 
           console.log(person)
           deletePerson( person.name, person.id )}
         }>delete</button>
-      </p>
+        </th>
+      </tr>
     ))
 
   return (    
@@ -119,8 +132,9 @@ const App = () => {
       <Notification message={message} />
 
       <h2>Numbers</h2>
-      <Rows persons={persons} filterTerm={filterTerm} />
-
+      <table><tbody>
+        <Rows id= "phonebook" persons={persons} filterTerm={filterTerm} />
+      </tbody></table>
     </div>
   )
 }

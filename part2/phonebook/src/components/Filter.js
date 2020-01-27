@@ -1,9 +1,12 @@
 import React from 'react'
 
 const Filter = ({ handleFilterChange }) => (
-  <form>
-    <div>
-      Filter names shown with <input onChange={handleFilterChange} />
+  <form
+    id = "filterForm">
+    <div className = "entryLine">
+      Filter names with: <input
+        className = "filterEntry"
+        onChange={handleFilterChange} />
     </div>
   </form>
 )
