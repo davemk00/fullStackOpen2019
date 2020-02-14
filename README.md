@@ -3,7 +3,7 @@ This is my submissions for the Helsinki Open University fullStackOpen2019 course
 https://fullstackopen.com/en/
 
 Started:
-
+- [part3](https://github.com/davemk00/FSO_part3/)
 
 Completed:
 
