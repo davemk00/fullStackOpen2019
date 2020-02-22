@@ -46,7 +46,7 @@ const App = () => {
     }
 
     if (!newNumber || !newName) {
-      setMessage(`Missing data - cannot add`)
+      setMessage(`Missing data - cannot add entry to database`)
     } else {
 
       //Check that the person is already in the list 
