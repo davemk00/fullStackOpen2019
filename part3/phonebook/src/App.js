@@ -62,11 +62,10 @@ const App = () => {
             .update(personUpdatedId, person)
             .then(
               response => {
-                // console.log(response)
                 setMessage(`${person.name} updated`)
                 setTimeout(() => {setMessage(null)}, 5000)                
                 setPersons(
-                  persons.map(p => (p.id !== personUpdatedId ? p : person))
+                  persons.map(p => (p.id !== personUpdatedId ? p : response.data))
                 )
               }
             )

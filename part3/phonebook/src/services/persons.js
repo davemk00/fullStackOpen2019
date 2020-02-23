@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseURL = '/api/persons/'
+const baseURL = 'http://localhost:3001/api/persons/'
 
 const getAll = () => {
   // console.log('Fetching names from database')
@@ -7,12 +7,11 @@ const getAll = () => {
 }
 
 const create = person => {
-  console.log('Creating name ' + person.name + ' in database')
+  // console.log('Creating name ' + person.name + ' in database')
   return axios.post(baseURL, person)
 }
 
 const update = ( id,  person) => {
-  // console.log('Updating number of ' + person.name + ' in database')
   return axios.put(baseURL + id, person)
 }
 
