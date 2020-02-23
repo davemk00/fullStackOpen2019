@@ -74,10 +74,10 @@ const App = () => {
               setTimeout(() => {setMessage(null)}, 5000) 
               
               personService
-              .getAll()
-              .then(response => {
-                setPersons(response.data)
-              })
+                .getAll()
+                .then(response => {
+                  setPersons(response.data)
+                })
             })
 
           : console.log(`${person.name} not updated`)  // Some other error??
@@ -91,8 +91,9 @@ const App = () => {
               setTimeout(() => {setMessage(null)}, 5000)
             })
             .catch(error => {   // promise catch
-              setMessage(`Error`)
-              setTimeout(() => {setMessage(null)}, 5000)})
+              setMessage(error.response.data.error);
+              setTimeout(() => {setMessage(null)}, 5000)
+            })
           )
       setNewName('')
       setNewNumber('')
