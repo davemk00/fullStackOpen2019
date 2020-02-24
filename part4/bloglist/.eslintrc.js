@@ -4,8 +4,10 @@ module.exports = {
         'commonjs': true,
         'es6': true,
         'node': true
-    },
-    'extends': 'airbnb-base',
+    }, 
+    'extends': [
+        'eslint:recommended'
+    ],
     'globals': {
         'Atomics': 'readonly',
         'SharedArrayBuffer': 'readonly'
@@ -30,8 +32,8 @@ module.exports = {
             'error',
             'never'
         ],
-        "no-console": 0,
-        "eqeqeq": "error",
-        "brace-style": ["error", "stroustrup"]
+        'no-console': 0,
+        'eqeqeq': 'error',
+        'brace-style': ['error', 'stroustrup'],
     }
 }
