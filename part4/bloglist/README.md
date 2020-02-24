@@ -14,5 +14,8 @@
   - using the dummy function
 
 
+**Commit 4** - Part 4.4 to Part 4.7: helper functions and unit tests, FINISHED
+  - a number of tests
+  - struggled to use the _ library
 
 
