@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "test": "jest --verbose",
     "watch": "nodemon index.js",
     "lint": "eslint ."
   },
@@ -41,6 +41,10 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "^25.1.0",
     "prettier": "^1.19.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
