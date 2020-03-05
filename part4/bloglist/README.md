@@ -21,3 +21,8 @@
 
 **Commit 5** - Part 4.8: Blog list tests, step1
   - supertest
+
+
+**Commit 6** - Part 4.9*: Blog list tests, step2
+  - added the missed refactoring requested in step 1
+  - tested for "id" as defined
