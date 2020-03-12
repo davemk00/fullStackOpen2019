@@ -26,3 +26,8 @@
 **Commit 6** - Part 4.9*: Blog list tests, step2
   - added the missed refactoring requested in step 1
   - tested for "id" as defined
+
+
+**Commit 7** - Part 4.10: Blog list tests, step3
+  - tests that POST increases blogs in DB by 1
+  - tests that the new url is saved 

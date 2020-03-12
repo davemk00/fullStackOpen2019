@@ -16,12 +16,19 @@ blogsRouter.get('/api/blogs', async (request, response) => {
   }
 })
 
-blogsRouter.post('/api/blogs', async (request, response) => {
-  const blog = new Blog(request.body)
+blogsRouter.post('/api/blogs', async (request, response, next) => {
+  const body = request.body
+
+  const blog = new Blog({
+    title: body.title,
+    author: body.author,
+    url: body.url,
+    likes: body.like,
+  })
 
   try {
     const savedBlog = await blog.save()
-    response.json(savedBlog.toJSON())
+    response.status(201).json(savedBlog.toJSON())
   } catch(exception) {
     console.log(exception)
   }
