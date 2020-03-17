@@ -23,13 +23,18 @@ blogsRouter.post('/api/blogs', async (request, response, next) => {
     title: body.title,
     author: body.author,
     url: body.url,
-    likes: body.like,
+    likes: (body.likes)? body.likes: 0,
   })
+
+  if ( blog.title == undefined || blog.url == undefined) {
+    return response.status(400).json({error: "Title and url are empty - must have values"})
+  }
 
   try {
     const savedBlog = await blog.save()
     response.status(201).json(savedBlog.toJSON())
-  } catch(exception) {
+  } 
+  catch(exception) {
     console.log(exception)
   }
 })

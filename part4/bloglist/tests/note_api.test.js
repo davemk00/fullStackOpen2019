@@ -34,7 +34,6 @@ test('HTTP POST a valid blog can be added through  request to /api/blogs increas
     title: Math.random().toString(36).substring(7),
     author: Math.random().toString(36).substring(7),
     url: 'A dummy URL for testing',
-   // url: 'Some URL',
     likes: Math.random()*10,
   }  
 
@@ -51,6 +50,47 @@ test('HTTP POST a valid blog can be added through  request to /api/blogs increas
   expect(contents).toContain('A dummy URL for testing')
 })
 
+
+test('If likes are missing, default to zero', async () => {
+  const withoutLikes = {
+    title: 'this is a blog without a like',
+    author: 'it\'s a test',
+    url: 'What\'s a URL?',
+  }
+  
+  const res = await api
+    .post('/api/blogs')
+    .send(withoutLikes)
+    .expect(201)
+  expect(res.body.likes).toBe(0)
+})
+
+
+test('Title and Url through 400 error', async () => {
+  const withoutTitle = {
+    author: "it's a test",
+    url: "What's a URL?",
+    likes: 12,
+  }
+
+  const withoutUrl = {
+    title: "this is a blog without a like",
+    author: "it's a test",
+    likes: 12,
+  }
+  
+  const res1 = await api
+    .post('/api/blogs')
+    .send(withoutTitle)
+    .expect(400)
+  console.log(res1.status)
+  
+  const res2 = await api
+    .post('/api/blogs')
+    .send(withoutUrl)
+    .expect(400)
+  console.log(res2.status)
+})
 
 afterAll(() => {
   mongoose.connection.close()

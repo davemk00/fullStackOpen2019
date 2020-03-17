@@ -31,3 +31,6 @@
 **Commit 7** - Part 4.10: Blog list tests, step3
   - tests that POST increases blogs in DB by 1
   - tests that the new url is saved 
+
+**Commit 8** - Part 4.11* and 4.12*: Blog list tests, step4 and step5
+  - 
