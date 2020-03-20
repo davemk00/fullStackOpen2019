@@ -13,6 +13,7 @@ console.log('connecting to:: ', mongoUrl)
 mongoose.connect(mongoUrl, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
+  useFindAndModify: false,
 })
 
 app.use(cors())

@@ -34,3 +34,7 @@
 
 **Commit 8** - Part 4.11* and 4.12*: Blog list tests, step4 and step5
   - 
+
+**Commit 9** - Part 4.13 and 4.14: Blog list expansions, step1 and step2
+  - Couldn't get the express-async-errors to work
+
