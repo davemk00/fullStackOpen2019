@@ -10,7 +10,7 @@ const mongoose = require('mongoose')
 const logger = require('./utils/logger')
 
 const mongoUrl = config.MONGODB_URI
-logger.info('connecting to:: ', mongoUrl)
+console.log('connecting to:: ', mongoUrl)
 
 mongoose.connect(mongoUrl, {
   useUnifiedTopology: true,
@@ -18,18 +18,18 @@ mongoose.connect(mongoUrl, {
   useFindAndModify: false,
 })
   .then(() => {
-    logger.info(`connected to:: `, mongoUrl)
+    console.log('connected to:: ', mongoUrl)
   })
   .catch((error) => {
-    logger.error('error connection to MongoDB:', error.message)
+    console.log('error connection to MongoDB:', error.message)
   })
 
 app.use(cors())
 app.use(express.static('build'))
 app.use(bodyParser.json())
 
-app.use('/', blogsRouter)
-app.use('/', usersRouter)
+app.use('/api/blogs', blogsRouter)
+app.use('/api/users', usersRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
