@@ -16,7 +16,7 @@ blogsRouter.get('/api/blogs', async (request, response) => {
 })
 
 
-blogsRouter.get('/api/blogs/:id', async (request, response, next) => {
+blogsRouter.get('/api/blogs/:id', async (request, response) => {
   const id = request.params.id
   logger.info(`Retrieving Blog ID: ${id} `)
 
@@ -33,7 +33,7 @@ blogsRouter.get('/api/blogs/:id', async (request, response, next) => {
 })
 
 
-blogsRouter.post('/api/blogs', async (request, response, next) => {
+blogsRouter.post('/api/blogs', async (request, response) => {
   const body = request.body
 
   const blog = new Blog({
@@ -62,7 +62,7 @@ blogsRouter.delete('/api/blogs/:id', async (request, response) => {
 })
 
 
-blogsRouter.put('/api/blogs/:id', async (request, response, next) => {
+blogsRouter.put('/api/blogs/:id', async (request, response) => {
   const { title, author, url, likes } = request.body
   const blog = { title, author, url, likes }
 

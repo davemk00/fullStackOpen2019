@@ -6,23 +6,21 @@ const helper = require('./test_helper')
 const api = supertest(app)
 const Blog = require('../models/blog')
 
-beforeEach( async () => {
-  await Blog.deleteMany({})
-
-  const blogObjects = helper.initialBlogs
-    .map(blog => new Blog(blog))
-  const promiseArray = blogObjects.map(blog => blog.save())
-  await Promise.all(promiseArray)
-
-  /*for (let blog of helper.initialBlogs) {
-    let blogObject = new Blog(blog)
-    await blogObject.save()
-  } */
-
-})
-
-
 describe('when there is initially some notes saved', () => {
+  beforeEach( async () => {
+    await Blog.deleteMany({})
+
+    const blogObjects = helper.initialBlogs
+      .map(blog => new Blog(blog))
+    const promiseArray = blogObjects.map(blog => blog.save())
+    await Promise.all(promiseArray)
+
+    /*for (let blog of helper.initialBlogs) {
+      let blogObject = new Blog(blog)
+      await blogObject.save()
+    } */
+  })
+
   test('blogs are returned as json', async () => {
     await api
       .get('/api/blogs')

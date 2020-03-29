@@ -43,3 +43,4 @@
   - implemented express-async-errors and got rid of try::catch
   - implemented logger middleware - well sort of
   
+**Commit 10** - 4.15: bloglist expansion, step4
