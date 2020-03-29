@@ -22,34 +22,28 @@ usersRouter.post('/api/users', async (request, response) => {
     passwordHash,
   })
 
-  if ( user.name === undefined || body.password === undefined ) {
+  if ( user.username === undefined || body.password === undefined ) {
     const errStr = 'Name or password missing - must have value'
-    logger.error(errStr)
+    logger.error( errStr )
     return response.status(400).json({ error: errStr })
   }
-
-  if ( body.password.length < 3 || body.username.length < 3 ) {
+  else if ( body.username.length < 3 || body.password.length < 3 ) {
     const errStr = 'Password and/or username too short - must be at least three letters long'
-    logger.error(errStr)
+    logger.error( errStr )
     return response.status(400).json({ error: errStr })
   }
-
-  const users = await User.find({})
-
-  // look at each username and test match
-  // Would be better to use map instead of a loop
-  users.forEach(e => {
-    var exUserName = e.username
-    if (exUserName.toLowerCase() === body.username.toLowerCase()){
+  else {
+    const userExist = await User.find({ username: RegExp(body.username,'i') })
+    if ( Array.isArray( userExist ) && userExist.length ) {
       const errStr = 'Username not available - try another username'
-      logger.error(errStr)
+      logger.error( errStr )
       return response.status(400).json({ error: errStr })
     }
-  })
-
-  const savedUser = await user.save()
-
-  response.json(savedUser)
+    else {
+      const savedUser = await user.save()
+      response.json( savedUser )
+    }
+  }
 })
 
 module.exports = usersRouter

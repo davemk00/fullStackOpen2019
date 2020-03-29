@@ -44,3 +44,6 @@
   - implemented logger middleware - well sort of
   
 **Commit 11** - 4.15: bloglist expansion, step4
+
+**Commit 12** - 4.16*: bloglist expansion, step5
+  - I tried to test for undefined username and password. But testing for length less than than three.
