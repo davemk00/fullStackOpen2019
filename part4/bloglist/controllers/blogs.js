@@ -1,6 +1,5 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
-require('express-async-errors')
 const logger = require('../utils/logger')
 
 blogsRouter.get('/', (request, response) => {
@@ -22,14 +21,13 @@ blogsRouter.get('/api/blogs/:id', async (request, response) => {
 
   const blog = await Blog.findById(id)
   if (blog) {
-    response.status(200).json(blog.toJSON())
     logger.info(`Blog ID: ${id} retrieved`)
+    response.status(200).json(blog.toJSON())
   } 
   else {
     logger.info(`Blog ID: ${id} not found`)
     response.status(404).end()
   }
-
 })
 
 

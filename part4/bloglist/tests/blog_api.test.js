@@ -62,8 +62,8 @@ describe('when there is initially some notes saved', () => {
         .expect(404)
     })
 
-    test('fails with statuscode 400 id is invalid', async () => {
-      const invalidId = '5a3d5da59070081a82a3445'
+    test('fails with statuscode 400 when id is invalid', async () => {
+      const invalidId = '5a422a851b54a676234d'
 
       await api
         .get(`/api/blogs/${invalidId}`)
@@ -109,7 +109,7 @@ describe('when there is initially some notes saved', () => {
       expect(res.body.likes).toBe(0)
     })
   
-    test('Title and Url through 400 error', async () => {
+    test('wihtout Title and Url throw 400 error', async () => {
       const withoutTitleOrUrl = {
         author: 'it\'s a test',
         likes: 12,

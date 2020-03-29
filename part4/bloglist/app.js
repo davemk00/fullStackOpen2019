@@ -1,5 +1,6 @@
 const config = require('./utils/config') 
 const express = require('express')
+require('express-async-errors')
 const bodyParser = require('body-parser')
 const app = express()
 const cors = require('cors')
@@ -18,7 +19,7 @@ mongoose.connect(mongoUrl, {
   useFindAndModify: false,
 })
   .then(() => {
-    logger.info(`connected to:: `, mongoUrl)
+    logger.info('connected to:: ', mongoUrl)
   })
   .catch((error) => {
     logger.error('error connection to MongoDB:', error.message)
