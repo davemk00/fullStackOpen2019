@@ -9,7 +9,7 @@ const blogsInDb = async() => {
 const initialBlogs = [
   {
     _id: '5a422a851b54a676234d17f7',
-    title: 'React patterns',
+    title: 'React patterns - development/test db',
     author: 'Michael Chan',
     url: 'https://reactpatterns.com/',
     likes: 7,

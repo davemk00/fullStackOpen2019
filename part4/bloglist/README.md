@@ -38,3 +38,8 @@
 **Commit 9** - Part 4.13 and 4.14: Blog list expansions, step1 and step2
   - Couldn't get the express-async-errors to work
 
+**Commit 10** - No modules but:
+  - fixed  the test/development/deployment database 
+  - implemented express-async-errors and got rid of try::catch
+  - implemented logger middleware - well sort of
+  
