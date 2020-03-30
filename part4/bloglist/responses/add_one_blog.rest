@@ -1,9 +1,10 @@
 POST http://localhost:3003/api/blogs 
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RVc2VybmFtZSIsImlkIjoiNWU4MjgzMjVmMmE2NDUzNWMwMGQ4YjhhIiwiaWF0IjoxNTg1NjExNTg3fQ.SYvUO-R6dgBHoWRyhVC6FCXBZ8eXhsgRaINtQ-NSKxI
 
 {
   "_id": "5a422a851b54a676234d17f4",
-  "title": "Testing Single Blog insert",
+  "title": "Testing Single Blog insert using login Token",
   "author": "An Author",
   "url": "https://reactpatterns.com/",
   "likes": 17,

@@ -48,4 +48,8 @@
 **Commit 12** - 4.16*: bloglist expansion, step5
   - I tried to test for undefined username and password. But testing for length less than than three.
 
-**Commit 12** - 4.17: bloglist expansion, step6
+**Commit 13** - 4.17: bloglist expansion, step6
+
+**Commit 14** - 4.18 & 4.19: bloglist expansion, step7 & step8
+
+
