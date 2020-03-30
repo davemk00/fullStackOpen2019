@@ -6,7 +6,7 @@ const helper = require('./test_helper')
 const api = supertest(app)
 const Blog = require('../models/blog')
 
-describe('when there is initially some notes saved', () => {
+describe('when there is initially some blogs saved', () => {
   beforeEach( async () => {
     await Blog.deleteMany({})
 
@@ -71,7 +71,7 @@ describe('when there is initially some notes saved', () => {
     })
   })
 
-  describe('addition of a new note', () => {
+  describe('addition of a new blog', () => {
     test('HTTP POST a valid blog can be added through  request to /api/blogs increases blog count by one', async () => {
       const initialBlogs = await api.get('/api/blogs')
       

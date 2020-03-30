@@ -1,5 +1,6 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
+const User = require('../models/user')
 const logger = require('../utils/logger')
 
 blogsRouter.get('/', (request, response) => {
@@ -9,8 +10,10 @@ blogsRouter.get('/', (request, response) => {
 })
 
 blogsRouter.get('/api/blogs', async (request, response) => {
-  const blogs = await Blog.find({})
-  response.json(blogs.map (blog => blog.toJSON()))
+  const blogs = await Blog
+    .find({})
+    .populate('user', { username: 1, name: 1, id: 1 })
+  response.json(blogs.map(blog => blog.toJSON()))
   logger.info('Blogs returned successully')
 })
 
@@ -23,7 +26,7 @@ blogsRouter.get('/api/blogs/:id', async (request, response) => {
   if (blog) {
     logger.info(`Blog ID: ${id} retrieved`)
     response.status(200).json(blog.toJSON())
-  } 
+  }
   else {
     logger.info(`Blog ID: ${id} not found`)
     response.status(404).end()
@@ -34,22 +37,30 @@ blogsRouter.get('/api/blogs/:id', async (request, response) => {
 blogsRouter.post('/api/blogs', async (request, response) => {
   const body = request.body
 
+  // const user = await User.findById(body.userId)
+  var user = await User.find({})
+  user = user[0]
+
   const blog = new Blog({
     title: body.title,
     author: body.author,
     url: body.url,
-    likes: (body.likes)? body.likes: 0,
+    likes: (body.likes) ? body.likes : 0,
+    user: user._id
   })
 
-  if ( blog.title === undefined && blog.url === undefined) {
+  if (blog.title === undefined && blog.url === undefined) {
     const errStr = 'Title and url are empty - must have values'
     logger.error(errStr)
-    return response.status(400).json({error: errStr})
+    return response.status(400).json({ error: errStr })
   }
-
-  const savedBlog = await blog.save()
-  response.status(201).json(savedBlog.toJSON())
-  logger.info('Entry created succesfully')
+  else {
+    const savedBlog = await blog.save()
+    user.blogs = user.blogs.concat(savedBlog._id)
+    await user.save()
+    response.status(201).json(savedBlog.toJSON())
+    logger.info('Entry created succesfully')
+  }
 })
 
 
@@ -64,7 +75,7 @@ blogsRouter.put('/api/blogs/:id', async (request, response) => {
   const { title, author, url, likes } = request.body
   const blog = { title, author, url, likes }
 
-  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {new: true})
+  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
   logger.info(`Blog ID: ${request.params.id} updated`)
   response.json(updatedBlog.toJSON())
 
