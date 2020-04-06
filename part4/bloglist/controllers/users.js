@@ -8,7 +8,6 @@ usersRouter.get('/api/users', async (request, response) => {
     .find({})
     .populate('blogs', { title: 1, author: 1, url: 1, id: 1 })
   response.json(users.map (user => user.toJSON()))
-  logger.info('Users returned successully')
 })
 
 

@@ -34,29 +34,14 @@ blogsRouter.get('/api/blogs/:id', async (request, response) => {
   }
 })
 
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
-  }
-  return null
-}
-
-
 blogsRouter.post('/api/blogs', async (request, response) => {
   const body = request.body
-  const token = getTokenFrom(request)
 
-  const decodedToken = jwt.verify(token, process.env.SECRET)
-  if (!token || !decodedToken.id) {
+  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  if (!request.token || !decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
-
   const user = await User.findById(decodedToken.id)
-  // var user = await User.find({})
-  // user = user[0]
-
-  console.log(user)
 
   const blog = new Blog({
     title: body.title,
@@ -82,9 +67,23 @@ blogsRouter.post('/api/blogs', async (request, response) => {
 
 
 blogsRouter.delete('/api/blogs/:id', async (request, response) => {
-  await Blog.findByIdAndRemove(request.params.id)
-  logger.info('Entry deleted succesfully')
-  response.status(204).end()
+  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  if (!request.token || !decodedToken.id) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
+  const user = await User.findById(decodedToken.id)
+  
+  const blog = await Blog.findById(request.params.id)
+
+  if (user._id.toString === blog.user.toString) {
+    await Blog.findByIdAndRemove(request.params.id)
+    logger.info('Entry deleted succesfully')
+    response.status(204).end()
+  }
+  else {
+    logger.info('Entry NOT deleted - username not found')
+    response.status(401).end()
+  }
 })
 
 
@@ -95,7 +94,6 @@ blogsRouter.put('/api/blogs/:id', async (request, response) => {
   const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
   logger.info(`Blog ID: ${request.params.id} updated`)
   response.json(updatedBlog.toJSON())
-
 })
 
 module.exports = blogsRouter

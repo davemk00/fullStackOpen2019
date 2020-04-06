@@ -10,20 +10,61 @@ const User = require('../models/user')
 describe('when there is initially one user at db', () => {
   beforeEach(async () => {
     await User.deleteMany({})    
-    const passwordHash = await bcrypt.hash('sekret', 10)
+    const passwordHash = await bcrypt.hash('testPassword', 10)
     const user = new User({ 
-      username: 'root', 
-      name: 'root Name', 
+      name: 'test name', 
+      username: 'testUsername', 
       passwordHash 
     })
     await user.save()
   })
   
+  describe('test login api', () => {
+    test('login with existing user returns 200', async () => {
+      const loginUser = {
+        username: "testUsername",
+        password: "testPassword"
+      }
+      const result = await api
+        .post('/api/login')
+        .send(loginUser)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+      
+      // const token = result.body.token
+      
+    })
+      
+    test('login with NON existing user returns 401', async () => {
+      const loginUser = {
+        username: "NotExistingUsername",
+        password: "testPassword"
+      }
+      await api
+        .post('/api/login')
+        .send(loginUser)
+        .expect(401)
+        .expect('Content-Type', /application\/json/)
+    })
+    
+    test('login with wrong password returns 401', async () => {
+      const loginUser = {
+        username: "testUsername",
+        password: "WrongPassword"
+      }
+      await api
+        .post('/api/login')
+        .send(loginUser)
+        .expect(401)
+        .expect('Content-Type', /application\/json/)
+    })
+  })
+
   test('database returns just one user', async () => {
     const usersAtStart = await helper.usersInDb()
     expect(usersAtStart.length).toBe(1)
   })
-  
+
   describe('Adding a user', () => {
     test('succeeds with a fresh username', async () => {
       const usersAtStart = await helper.usersInDb()
@@ -33,7 +74,7 @@ describe('when there is initially one user at db', () => {
         name: 'David King',
         password: 'password123',
       }
-
+      
       await api
         .post('/api/users')
         .send(newUser)
@@ -51,8 +92,8 @@ describe('when there is initially one user at db', () => {
       const usersAtStart = await helper.usersInDb()
 
       const newUser = {
-        username: 'root',
         name: 'superUser',
+        username: 'testUsername',
         password: 'password123',
       }
 
@@ -106,6 +147,9 @@ describe('when there is initially one user at db', () => {
       const usersAtEnd = await helper.usersInDb()
       expect(usersAtEnd.length).toBe(usersAtStart.length)
     })
+
+
+
 
     //test usernames that are undefined
 

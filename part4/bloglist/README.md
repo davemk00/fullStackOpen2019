@@ -50,6 +50,8 @@
 
 **Commit 13** - 4.17: bloglist expansion, step6
 
-**Commit 14** - 4.18 & 4.19: bloglist expansion, step7 & step8
+**Commit 14** - 4.18, 4.19, 4.20*: bloglist expansion, step7, step8, step9
 
-
+**Commit 15** - Up to 4.22*: bloglist expansion, step11
+  - refactored the token authorization to middleware - with great frustration
+  - some issues with checking the user token, so the check is by elimination
