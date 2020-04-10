@@ -16,13 +16,42 @@ const App = () => {
     )  
   }, [])
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      //noteService.setToken(user.token)
+    }
+  }, [])
+
+  const handleLogout = async (event) => {
+    event.preventDefault()
+    console.log('logging out')
+    try {
+      window.localStorage.removeItem('loggedNoteappUser')
+
+      blogService.setToken('user.token')
+      setUser(null)
+      setUsername('')
+      setPassword('')
+      console.log('user logged out')
+    } catch (exception) {
+      console.log('not logged out')
+    }
+  }
+
   const handleLogin = async (event) => {
     event.preventDefault()
-
+    console.log('logging in with', username, password)
     try {
       const user = await loginService.login({
         username, password,
       })
+      
+      window.localStorage.setItem(
+        'loggedNoteappUser', JSON.stringify(user)
+      ) 
 
       blogService.setToken(user.token)
       setUser(user)
@@ -36,11 +65,27 @@ const App = () => {
         console.log(null) 
       }, 5000)
     }
-    console.log('logging in with', username, password)
   }
  
+  const logoutForm = () => (
+    <form onSubmit={ handleLogout }>
+      <div>
+        <div>
+          { user.name } logged in  
+          <button type="submit">logout</button>
+        </div>
+        <div>
+          <h2>Blogs: </h2>
+          {blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} />
+            )}
+        </div>
+      </div>
+    </form>     
+  )
+
   const loginForm = () => (
-    <form onSubmit={handleLogin}>        
+    <form onSubmit={ handleLogin }>        
       <div>
         <h2>Log in: </h2>
         username 
@@ -48,10 +93,10 @@ const App = () => {
         type="text"
         value={ username }
         name="Username"            
-        onChange={({ target }) => setUsername(target.value)}          
-        />        
-      </div>        
-      <div>          
+        onChange={({ target }) => setUsername(target.value)}
+        />
+      </div>
+      <div>
         password
         <input
           type="password"
@@ -70,15 +115,7 @@ const App = () => {
 
       {user === null ?
         loginForm() : 
-        <div>
-          <p>{ user.name } logged in</p>
-          <div>
-            <h2>Blogs: </h2>
-            {blogs.map(blog =>
-              <Blog key={blog.id} blog={blog} />
-              )}
-          </div>
-        </div>
+        logoutForm()
       }
     </div>
   )
