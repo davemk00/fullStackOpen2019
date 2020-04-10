@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
-// import Notification from './components/Notification'
+import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -12,6 +12,9 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [infoMessage, setInfoMessage] = useState(null)
   
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -24,7 +27,7 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
-      //noteService.setToken(user.token)
+      blogService.setToken(user.token)
     }
   }, [])
 
@@ -60,11 +63,15 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch (exception) {
-      // setErrorMessage('Wrong credentials')
-      console.log('Wrong credentials')
+      setInfoMessage(`${username} Logged in`)
       setTimeout(() => {
-        // setErrorMessage(null)
+        setInfoMessage(null)
+        console.log(null) 
+      }, 5000)
+    } catch (exception) {
+      setErrorMessage(exception.response.data.error)
+      setTimeout(() => {
+        setErrorMessage(null)
         console.log(null) 
       }, 5000)
     }
@@ -74,7 +81,7 @@ const App = () => {
     <form onSubmit={ handleLogout }>
       <div>
         <div>
-          { user.name } logged in  
+          { user.name } logged in.
           <button type="submit">logout</button>
         </div>
       </div>
@@ -87,15 +94,17 @@ const App = () => {
         <h2>Log in: </h2>
         username 
         <input
-        type="text"
-        value={ username }
-        name="Username"            
-        onChange={({ target }) => setUsername(target.value)}
+          className = "entry"
+          type="text"
+          value={ username }
+          name="Username"            
+          onChange={({ target }) => setUsername(target.value)}
         />
       </div>
       <div>
         password
         <input
+         className = "entry"
           type="password"
           value={ password }
           name="Password"
@@ -108,7 +117,7 @@ const App = () => {
 
   const blogForm = () => (
     <div>
-      <h2>Blogs: </h2>
+      <h3>Blogs: </h3>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
@@ -120,16 +129,19 @@ const App = () => {
       <h3>New blog:</h3>
       <div className = "blogEntry">
         Title: <input
+          className = "entry"
           value={newBlogTitle}
           onChange={event => setNewBlogTitle(event.target.value)}
           />
           <br></br>
         Author: <input
+          className = "entry"
           value={newBlogAuthor}
           onChange={event => setNewBlogAuthor(event.target.value)}
           />
           <br></br>
         URL: <input
+          className = "entry"
           value={newBlogURL}
           onChange={event => setNewBlogURL(event.target.value)}
           />
@@ -144,8 +156,7 @@ const App = () => {
     const blogObject = {
       title: newBlogTitle,
       author: newBlogAuthor,
-      url: 'testURL',
-      likes: 69,
+      url: newBlogURL,
     }
   
     blogService
@@ -155,6 +166,11 @@ const App = () => {
         setNewBlogTitle('')
         setNewBlogAuthor('')
         setNewBlogURL('')
+        setInfoMessage(`a new blog ${returnedBlog.title} by ${returnedBlog.author} has been added`)
+        setTimeout(() => {
+        setInfoMessage(null)
+          console.log(null) 
+        }, 5000)    
       })
   }
 
@@ -164,12 +180,15 @@ const App = () => {
     <div>
       <h1>Blogs</h1>
 
+      <Notification message={ errorMessage } type={ 'error' } />
+      <Notification message={ infoMessage } type={ 'info' } />
+
       {user === null ?
         loginForm() : 
         <div>
           {logoutForm()}
-          {blogForm()}
           {newBlogForm()}
+          {blogForm()}
         </div>
       }
     </div>
