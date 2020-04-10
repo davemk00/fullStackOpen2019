@@ -8,4 +8,10 @@
 **Commit 3** - 5.3: bloglist frontend, step3
 
 **Commit 4** - 5.4*: bloglist frontend, step4
+
+**Commit 5** - 5.5 Blog list frontend, step5
+  - Implemented Togglable for the create new blog section
+  - Moved loginForm to new component
+
+
   

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
+
+import LoginForm from './components/Login'
 import Blog from './components/Blog'
 import Notification from './components/Notification'
+import Togglable from './components/Togglable'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -9,6 +12,8 @@ const App = () => {
   const [newBlogTitle, setNewBlogTitle] = useState('')
   const [newBlogAuthor, setNewBlogAuthor] = useState('')
   const [newBlogURL, setNewBlogURL] = useState('')
+
+  const [loginVisible, setLoginVisible] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -82,38 +87,46 @@ const App = () => {
       <div>
         <div>
           { user.name } logged in.
-          <button type="submit">logout</button>
+          <button type="submit" onClick={() => setLoginVisible(false)}>logout</button>
         </div>
       </div>
     </form>     
   )
 
-  const loginForm = () => (
-    <form onSubmit={ handleLogin }>
+  // const loginForm = () => (
+  //   <Togglable buttonLabel='login'>
+  //     <LoginForm
+  //       username={username}
+  //       password={password}
+  //       handleUsernameChange={({ target }) => setUsername(target.value)}
+  //       handlePasswordChange={({ target }) => setPassword(target.value)}
+  //       handleSubmit={handleLogin}
+  //     />
+  //   </Togglable>
+  // )
+
+  const loginForm = () => {
+    const hideWhenVisible = { display: loginVisible ? 'none' : '' }
+    const showWhenVisible = { display: loginVisible ? '' : 'none' }
+    
+    return (
       <div>
-        <h2>Log in: </h2>
-        username 
-        <input
-          className = "entry"
-          type="text"
-          value={ username }
-          name="Username"            
-          onChange={({ target }) => setUsername(target.value)}
-        />
+        <div style={hideWhenVisible}>
+          <button onClick={() => setLoginVisible(true)}>log in</button>
+        </div>
+        <div style={showWhenVisible}>
+          <LoginForm
+            username={username}
+            password={password}
+            handleUsernameChange={({ target }) => setUsername(target.value)}
+            handlePasswordChange={({ target }) => setPassword(target.value)}
+            handleLogin={handleLogin}
+          />
+          <button onClick={() => setLoginVisible(false)}>cancel</button>
+        </div>
       </div>
-      <div>
-        password
-        <input
-         className = "entry"
-          type="password"
-          value={ password }
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      <button type="submit">login</button>
-    </form>
-  )
+    )
+  }
 
   const blogForm = () => (
     <div>
@@ -125,30 +138,32 @@ const App = () => {
   )
 
   const newBlogForm = () => (
-    <form onSubmit={addBlog}>
-      <h3>New blog:</h3>
-      <div className = "blogEntry">
-        Title: <input
-          className = "entry"
-          value={newBlogTitle}
-          onChange={event => setNewBlogTitle(event.target.value)}
-          />
-          <br></br>
-        Author: <input
-          className = "entry"
-          value={newBlogAuthor}
-          onChange={event => setNewBlogAuthor(event.target.value)}
-          />
-          <br></br>
-        URL: <input
-          className = "entry"
-          value={newBlogURL}
-          onChange={event => setNewBlogURL(event.target.value)}
-          />
-          <br></br>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <Togglable buttonLabel='new note'>    
+      <form onSubmit={addBlog}>
+        <h3>New blog:</h3>
+        <div className = "blogEntry">
+          Title: <input
+            className = "entry"
+            value={newBlogTitle}
+            onChange={event => setNewBlogTitle(event.target.value)}
+            />
+            <br></br>
+          Author: <input
+            className = "entry"
+            value={newBlogAuthor}
+            onChange={event => setNewBlogAuthor(event.target.value)}
+            />
+            <br></br>
+          URL: <input
+            className = "entry"
+            value={newBlogURL}
+            onChange={event => setNewBlogURL(event.target.value)}
+            />
+            <br></br>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </Togglable>
   )
   
   const addBlog = (event) => {
@@ -184,7 +199,10 @@ const App = () => {
       <Notification message={ infoMessage } type={ 'info' } />
 
       {user === null ?
-        loginForm() : 
+        <div>
+          {loginForm()}
+          {blogForm()}
+        </div> : 
         <div>
           {logoutForm()}
           {newBlogForm()}
