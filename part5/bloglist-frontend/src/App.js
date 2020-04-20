@@ -20,6 +20,8 @@ const App = () => {
 
   const [errorMessage, setErrorMessage] = useState(null)
   const [infoMessage, setInfoMessage] = useState(null)
+
+  const blogFormRef = React.createRef()
   
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -77,7 +79,7 @@ const App = () => {
       setErrorMessage(exception.response.data.error)
       setTimeout(() => {
         setErrorMessage(null)
-        console.log(null) 
+        // console.log(null) 
       }, 5000)
     }
   }
@@ -138,7 +140,7 @@ const App = () => {
   )
 
   const newBlogForm = () => (
-    <Togglable buttonLabel='new note'>    
+    <Togglable buttonLabel='new note' ref={blogFormRef}>    
       <form onSubmit={addBlog}>
         <h3>New blog:</h3>
         <div className = "blogEntry">
@@ -173,7 +175,8 @@ const App = () => {
       author: newBlogAuthor,
       url: newBlogURL,
     }
-  
+    
+    blogFormRef.current.toggleVisibility()
     blogService
       .create(blogObject)
       .then(returnedBlog => {
@@ -185,7 +188,7 @@ const App = () => {
         setTimeout(() => {
         setInfoMessage(null)
           console.log(null) 
-        }, 5000)    
+        }, 5000)
       })
   }
 
