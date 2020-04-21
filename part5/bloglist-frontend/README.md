@@ -16,4 +16,7 @@
 **Commit 6** - 5.5: Blog list frontend, step5
   - implemented close of section after new blog created
 
+**Commit 7** - 5.6: Blog list frontend, step6
   
+
+

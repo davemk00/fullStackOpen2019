@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import LoginForm from './components/Login'
+import BlogForm from './components/BlogForm'
 import Blog from './components/Blog'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
@@ -9,9 +10,6 @@ import loginService from './services/login'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [newBlogTitle, setNewBlogTitle] = useState('')
-  const [newBlogAuthor, setNewBlogAuthor] = useState('')
-  const [newBlogURL, setNewBlogURL] = useState('')
 
   const [loginVisible, setLoginVisible] = useState(false)
   const [username, setUsername] = useState('')
@@ -141,49 +139,16 @@ const App = () => {
 
   const newBlogForm = () => (
     <Togglable buttonLabel='new note' ref={blogFormRef}>    
-      <form onSubmit={addBlog}>
-        <h3>New blog:</h3>
-        <div className = "blogEntry">
-          Title: <input
-            className = "entry"
-            value={newBlogTitle}
-            onChange={event => setNewBlogTitle(event.target.value)}
-            />
-            <br></br>
-          Author: <input
-            className = "entry"
-            value={newBlogAuthor}
-            onChange={event => setNewBlogAuthor(event.target.value)}
-            />
-            <br></br>
-          URL: <input
-            className = "entry"
-            value={newBlogURL}
-            onChange={event => setNewBlogURL(event.target.value)}
-            />
-            <br></br>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+      <BlogForm createBlog={addBlog} />
     </Togglable>
   )
   
-  const addBlog = (event) => {
-    event.preventDefault()
-    const blogObject = {
-      title: newBlogTitle,
-      author: newBlogAuthor,
-      url: newBlogURL,
-    }
-    
+  const addBlog = (blogObject) => {
     blogFormRef.current.toggleVisibility()
     blogService
       .create(blogObject)
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
-        setNewBlogTitle('')
-        setNewBlogAuthor('')
-        setNewBlogURL('')
         setInfoMessage(`a new blog ${returnedBlog.title} by ${returnedBlog.author} has been added`)
         setTimeout(() => {
         setInfoMessage(null)
@@ -191,8 +156,6 @@ const App = () => {
         }, 5000)
       })
   }
-
-
 
   return (
     <div>
