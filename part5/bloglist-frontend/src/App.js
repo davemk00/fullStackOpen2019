@@ -93,18 +93,6 @@ const App = () => {
     </form>     
   )
 
-  // const loginForm = () => (
-  //   <Togglable buttonLabel='login'>
-  //     <LoginForm
-  //       username={username}
-  //       password={password}
-  //       handleUsernameChange={({ target }) => setUsername(target.value)}
-  //       handlePasswordChange={({ target }) => setPassword(target.value)}
-  //       handleSubmit={handleLogin}
-  //     />
-  //   </Togglable>
-  // )
-
   const loginForm = () => {
     const hideWhenVisible = { display: loginVisible ? 'none' : '' }
     const showWhenVisible = { display: loginVisible ? '' : 'none' }
@@ -171,6 +159,7 @@ const App = () => {
         </div> : 
         <div>
           {logoutForm()}
+          <br/>
           {newBlogForm()}
           {blogForm()}
         </div>

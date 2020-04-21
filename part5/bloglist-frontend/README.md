@@ -18,5 +18,6 @@
 
 **Commit 7** - 5.6: Blog list frontend, step6
   
+**Commit 8** - 5.7: Blog list frontend, step7
 
 
