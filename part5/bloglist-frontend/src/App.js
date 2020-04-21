@@ -22,9 +22,11 @@ const App = () => {
   const blogFormRef = React.createRef()
   
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
+    const getData = async () => {
+      const blogs = await blogService.getAll()
+      setBlogs(blogs)
+    }
+    getData()
   }, [])
 
   useEffect(() => {
@@ -116,7 +118,7 @@ const App = () => {
     )
   }
 
-  const blogForm = () => (
+  const blogRows = () => (
     <div>
       <h3>Blogs: </h3>
       {blogs.map(blog =>
@@ -125,24 +127,24 @@ const App = () => {
     </div>
   )
 
+
+
+
   const newBlogForm = () => (
     <Togglable buttonLabel='new note' ref={blogFormRef}>    
       <BlogForm createBlog={addBlog} />
     </Togglable>
   )
   
-  const addBlog = (blogObject) => {
+  const addBlog = async (blogObject) => {
     blogFormRef.current.toggleVisibility()
-    blogService
-      .create(blogObject)
-      .then(returnedBlog => {
-        setBlogs(blogs.concat(returnedBlog))
-        setInfoMessage(`a new blog ${returnedBlog.title} by ${returnedBlog.author} has been added`)
-        setTimeout(() => {
-        setInfoMessage(null)
-          console.log(null) 
-        }, 5000)
-      })
+    const result = await blogService.create(blogObject)
+    setBlogs(blogs.concat(result))
+    setInfoMessage(`a new blog ${result.title} by ${result.author} has been added`)
+    setTimeout(() => {
+    setInfoMessage(null)
+      console.log(null) 
+    }, 5000)
   }
 
   return (
@@ -155,13 +157,13 @@ const App = () => {
       {user === null ?
         <div>
           {loginForm()}
-          {blogForm()}
+          {blogRows()}
         </div> : 
         <div>
           {logoutForm()}
           <br/>
           {newBlogForm()}
-          {blogForm()}
+          {blogRows()}
         </div>
       }
     </div>

@@ -20,4 +20,6 @@
   
 **Commit 8** - 5.7: Blog list frontend, step7
 
+**Commit 9** - 5.8*: Blog list frontend, step8
+  - replaced some next/then with async/await
 
