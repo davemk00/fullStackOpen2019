@@ -20,7 +20,7 @@ const App = () => {
   const [infoMessage, setInfoMessage] = useState(null)
 
   const blogFormRef = React.createRef()
-  
+
   useEffect(() => {
     const getData = async () => {
       var blogs = await blogService.getAll()
@@ -65,7 +65,7 @@ const App = () => {
       
       window.localStorage.setItem(
         'loggedNoteappUser', JSON.stringify(user)
-      ) 
+      )
 
       blogService.setToken(user.token)
       setUser(user)
@@ -74,13 +74,13 @@ const App = () => {
       setInfoMessage(`${username} Logged in`)
       setTimeout(() => {
         setInfoMessage(null)
-        // console.log(null) 
+        // console.log(null)
       }, 5000)
     } catch (exception) {
       setErrorMessage(exception.response.data.error)
       setTimeout(() => {
         setErrorMessage(null)
-        // console.log(null) 
+        // console.log(null)
       }, 5000)
     }
   }
@@ -93,7 +93,7 @@ const App = () => {
           <button type="submit" onClick={() => setLoginVisible(false)}>logout</button>
         </div>
       </div>
-    </form>     
+    </form>
   )
 
   const loginForm = () => {
@@ -132,6 +132,7 @@ const App = () => {
       )}
     </div>
   )
+  
 
   const removeBlog = async (blog) => {
     try {
@@ -140,7 +141,7 @@ const App = () => {
         const newBlogs = blogs.filter(x => x.id !== blog.id)
         if (!response) {
           setBlogs(newBlogs)
-          setInfoMessage(`Blog removed successfully`)
+          setInfoMessage(`Blog ${blog.title} removed successfully`)
           setTimeout(() => {
             setErrorMessage(null)
           }, 5000)
@@ -155,7 +156,7 @@ const App = () => {
   }
 
   const newBlogForm = () => (
-    <Togglable buttonLabel='new note' ref={blogFormRef}>    
+    <Togglable buttonLabel='new note' ref={blogFormRef}>
       <BlogForm createBlog={addBlog} />
     </Togglable>
   )
@@ -167,8 +168,8 @@ const App = () => {
     setBlogs(blogs.concat(result))
     setInfoMessage(`a new blog ${result.title} by ${result.author} has been added`)
     setTimeout(() => {
-    setInfoMessage(null)
-      console.log(null) 
+      setInfoMessage(null)
+      console.log(null)
     }, 5000)
   }
 
@@ -183,7 +184,7 @@ const App = () => {
         <div>
           {loginForm()}
           {blogRows()}
-        </div> : 
+        </div> :
         <div>
           {logoutForm()}
           <br/>

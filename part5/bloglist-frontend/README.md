@@ -27,4 +27,11 @@
   - change to part 4: backend to return user object in the blog
   - updated the test for part 4 - delete
 
+**Commit 11** - 5.11 and 5.12: Blog list frontend, step11 and step12
+  - Prop-types for:
+    - Toggleable
+    - LoginForm
+    - BlogForm
+    - Blog
+  - installed eslint - again
 
