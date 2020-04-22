@@ -23,7 +23,8 @@ const App = () => {
   
   useEffect(() => {
     const getData = async () => {
-      const blogs = await blogService.getAll()
+      var blogs = await blogService.getAll()
+      blogs = blogs.sort((a, b) => b.likes - a.likes)
       setBlogs(blogs)
     }
     getData()
@@ -73,7 +74,7 @@ const App = () => {
       setInfoMessage(`${username} Logged in`)
       setTimeout(() => {
         setInfoMessage(null)
-        console.log(null) 
+        // console.log(null) 
       }, 5000)
     } catch (exception) {
       setErrorMessage(exception.response.data.error)
@@ -122,13 +123,36 @@ const App = () => {
     <div>
       <h3>Blogs: </h3>
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog
+          key = {blog.id}
+          blog={blog}
+          handleRemove={() => removeBlog(blog)}
+          showRemoveButton = {user && (user.id === blog.user.id)}
+        />
       )}
     </div>
   )
 
-
-
+  const removeBlog = async (blog) => {
+    try {
+      if (window.confirm(`Confirm Delete Blog: ${blog.title} by ${blog.author}`)) {
+        const response = await blogService.remove(blog.id)
+        const newBlogs = blogs.filter(x => x.id !== blog.id)
+        if (!response) {
+          setBlogs(newBlogs)
+          setInfoMessage(`Blog removed successfully`)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
+        }
+      }
+    } catch (exception) {
+      setErrorMessage(exception.response.data.error)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
 
   const newBlogForm = () => (
     <Togglable buttonLabel='new note' ref={blogFormRef}>    
@@ -139,6 +163,7 @@ const App = () => {
   const addBlog = async (blogObject) => {
     blogFormRef.current.toggleVisibility()
     const result = await blogService.create(blogObject)
+    console.log(result)
     setBlogs(blogs.concat(result))
     setInfoMessage(`a new blog ${result.title} by ${result.author} has been added`)
     setTimeout(() => {

@@ -48,7 +48,7 @@ blogsRouter.post('/api/blogs', async (request, response) => {
     author: body.author,
     url: body.url,
     likes: (body.likes) ? body.likes : 0,
-    user: user._id
+    user: user
   })
 
   if (blog.title === undefined && blog.url === undefined) {
@@ -72,8 +72,11 @@ blogsRouter.delete('/api/blogs/:id', async (request, response) => {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
   const user = await User.findById(decodedToken.id)
-  
   const blog = await Blog.findById(request.params.id)
+
+  if (!blog.user) {
+    return response.status(500).json({ error: 'No user assigned to blog'})
+  }
 
   if (user._id.toString === blog.user.toString) {
     await Blog.findByIdAndRemove(request.params.id)
@@ -81,7 +84,7 @@ blogsRouter.delete('/api/blogs/:id', async (request, response) => {
     response.status(204).end()
   }
   else {
-    logger.info('Entry NOT deleted - username not found')
+    logger.info('Entry NOT deleted - incorrect user')
     response.status(401).end()
   }
 })

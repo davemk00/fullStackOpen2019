@@ -23,3 +23,8 @@
 **Commit 9** - 5.8*: Blog list frontend, step8
   - replaced some next/then with async/await
 
+**Commit 10** - 5.9* and 5.10*: Blog list frontend, step9 and step10
+  - change to part 4: backend to return user object in the blog
+  - updated the test for part 4 - delete
+
+

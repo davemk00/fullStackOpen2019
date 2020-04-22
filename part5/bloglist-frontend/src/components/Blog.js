@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import blogService from '../services/blogs'
 
-const Blog = ({ blog }) => {
+const Blog = ({
+  blog,
+  handleRemove,
+  showRemoveButton,
+  }) => {
   const [likes, setLikes] = useState(blog.likes)
   const [blogDetailsVisible, setBlogDetailsVisible] = useState(false)
   const hideWhenVisible = { display: blogDetailsVisible ? 'none' : '' }
@@ -19,7 +23,6 @@ const Blog = ({ blog }) => {
     const response = await blogService.update(blog.id, blog)
     setLikes(response.likes)
   }
-    
 
   return (
     <div style={blogStyle}>
@@ -38,6 +41,8 @@ const Blog = ({ blog }) => {
         <button onClick={() => updateLikes(blog)}>Like</button>
         <br />
         {blog.author}
+        <br />
+        {showRemoveButton && <button onClick={handleRemove}>Remove</button>}
       </div>
     </div>
   )

@@ -252,28 +252,27 @@ describe('Deletion of a Blog', () => {
       url: 'A dummy URL for testing',
       likes: Math.random()*10,
     }
-    await api
+    const blogResp = await api
       .post('/api/blogs')
       .set('Authorization', `bearer ${loginToken}`)
       .send(newBlog)
       .expect(201)
       .expect('Content-Type', /application\/json/)
     
-    const blogsAtStart = await helper.blogsInDb()    
-    const blogToDelete = await Blog.findById
+    const blogsAtStart = await helper.blogsInDb()
 
     await api
-      .delete(`/api/blogs/${blogToDelete.id}`)
+      .delete(`/api/blogs/${blogResp.body.id}`)
       .set('Authorization', `bearer ${loginToken}`)
       .expect(204)
-
+ 
     const blogsAtEnd = await helper.blogsInDb()
     expect(blogsAtEnd.length).toBe(
       blogsAtStart.length - 1
     )
 
     const contents = blogsAtEnd.map(r => r.content)
-    expect(contents).not.toContain(blogToDelete.id)
+    expect(contents).not.toContain(blogResp.body.id)
   })
 })
 
