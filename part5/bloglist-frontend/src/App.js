@@ -10,7 +10,7 @@ import loginService from './services/login'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [likes, setLikes] = useState([])
+  // const [likes, setLikes] = useState([])
 
   const [loginVisible, setLoginVisible] = useState(false)
   const [username, setUsername] = useState('')
@@ -138,7 +138,13 @@ const App = () => {
   const updateLikes = async (blog) => {
     ++blog.likes
     const response = await blogService.update(blog.id, blog)
-    setLikes(response.likes)
+    blogs[blog.id] = response
+    setBlogs(blogs)
+    setInfoMessage(`blog ${response.title} by ${response.author} has been liked`)
+    setTimeout(() => {
+      setInfoMessage(null)
+      console.log(null)
+    }, 3000)
   }
 
   const removeBlog = async (blog) => {

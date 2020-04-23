@@ -38,7 +38,9 @@
 **Commit 12** - 5.13/5.14/5.15: Blog list tests, step1/2/3
   - included a number of steps and tests
   - created an update handler to support mockHandler
-  
 
+**Commit 13** - removed the setLikes state
+  - used setBlogs instead, but
+  - needed to add a infobox to make the like update - probably a async issue
 
 
