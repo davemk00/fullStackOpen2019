@@ -23,15 +23,22 @@
 **Commit 9** - 5.8*: Blog list frontend, step8
   - replaced some next/then with async/await
 
-**Commit 10** - 5.9* and 5.10*: Blog list frontend, step9 and step10
+**Commit 10** - 5.9* & 5.10*: Blog list frontend, step9 & step10
   - change to part 4: backend to return user object in the blog
   - updated the test for part 4 - delete
 
-**Commit 11** - 5.11 and 5.12: Blog list frontend, step11 and step12
+**Commit 11** - 5.11 & 5.12: Blog list frontend, step11 & step12
   - Prop-types for:
     - Toggleable
     - LoginForm
     - BlogForm
     - Blog
   - installed eslint - again
+
+**Commit 12** - 5.13/5.14/5.15: Blog list tests, step1/2/3
+  - included a number of steps and tests
+  - created an update handler to support mockHandler
+  
+
+
 

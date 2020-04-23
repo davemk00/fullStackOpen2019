@@ -10,6 +10,7 @@ import loginService from './services/login'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [likes, setLikes] = useState([])
 
   const [loginVisible, setLoginVisible] = useState(false)
   const [username, setUsername] = useState('')
@@ -126,13 +127,19 @@ const App = () => {
         <Blog
           key = {blog.id}
           blog={blog}
+          handleUpdate={() => updateLikes(blog)}
           handleRemove={() => removeBlog(blog)}
           showRemoveButton = {user && (user.id === blog.user.id)}
         />
       )}
     </div>
   )
-  
+
+  const updateLikes = async (blog) => {
+    ++blog.likes
+    const response = await blogService.update(blog.id, blog)
+    setLikes(response.likes)
+  }
 
   const removeBlog = async (blog) => {
     try {

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import blogService from '../services/blogs'
+// import blogService from '../services/blogs'
 import PropTypes from 'prop-types'
 
 const Blog = ({
   blog,
   handleRemove,
+  handleUpdate,
   showRemoveButton,
 }) => {
-  const [likes, setLikes] = useState(blog.likes)
   const [blogDetailsVisible, setBlogDetailsVisible] = useState(false)
   const hideWhenVisible = { display: blogDetailsVisible ? 'none' : '' }
   const showWhenVisible = { display: blogDetailsVisible ? '' : 'none' }
@@ -19,32 +19,32 @@ const Blog = ({
     marginBottom: 5
   }
 
-  const updateLikes = async (blog) => {
-    ++blog.likes
-    const response = await blogService.update(blog.id, blog)
-    setLikes(response.likes)
-  }
+  const fullBlog = (
+    <div style={showWhenVisible} className='blogShow'>
+      <b>{blog.title}</b>
+      <button onClick={() => setBlogDetailsVisible(false)}>Hide</button>
+      <br/>
+      {blog.url}
+      <br />
+      {blog.likes} likes
+      <button onClick={handleUpdate}>Like</button>
+      <br />
+      {blog.author}
+      <br />
+      {showRemoveButton && <button onClick={handleRemove}>Remove</button>}
+    </div>
+  )
+
+  const shortBlog = (
+    <div style={hideWhenVisible} className='blogHide'>
+      <b>{blog.title}</b> {blog.author}
+      <button onClick={() => setBlogDetailsVisible(true)}>Show</button>
+    </div>
+  )
 
   return (
     <div style={blogStyle}>
-      <div style={hideWhenVisible}>
-        <b>{blog.title}</b> {blog.author}
-        <button onClick={() => setBlogDetailsVisible(true)}>show</button>
-      </div>
-
-      <div style={showWhenVisible}>
-        <b>{blog.title}</b>
-        <button onClick={() => setBlogDetailsVisible(false)}>hide</button>
-        <br/>
-        {blog.url}
-        <br />
-        {likes} likes
-        <button onClick={() => updateLikes(blog)}>Like</button>
-        <br />
-        {blog.author}
-        <br />
-        {showRemoveButton && <button onClick={handleRemove}>Remove</button>}
-      </div>
+      {blogDetailsVisible ? fullBlog : shortBlog}
     </div>
   )
 }
