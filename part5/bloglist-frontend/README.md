@@ -44,3 +44,11 @@
   - needed to add a infobox to make the like update - probably a async issue
 
 
+**Commit 14** - 5.16* Blog list tests, step4
+  - Testing Togglable elements
+  - reworked hide function of login form from css in App.js to Togglable 
+  - refactored BlogForm to include handlers
+  - Tried to do testing the blog input form - But couldn't get it to work
+  - 
+
+

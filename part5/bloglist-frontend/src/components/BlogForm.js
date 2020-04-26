@@ -6,6 +6,16 @@ const BlogForm = ({ createBlog }) => {
   const [newBlogAuthor, setNewBlogAuthor] = useState('')
   const [newBlogURL, setNewBlogURL] = useState('')
 
+  const handleTitleChange = (event) => {
+    setNewBlogTitle(event.target.value)
+  }
+  const handleURLChange = (event) => {
+    setNewBlogURL(event.target.value)
+  }
+  const handleAuthorChange = (event) => {
+    setNewBlogAuthor(event.target.value)
+  }
+
   const addBlog = (event) => {
     event.preventDefault()
     createBlog({
@@ -20,30 +30,35 @@ const BlogForm = ({ createBlog }) => {
 
 
   return (
-    <form onSubmit={addBlog}>
-      <h3>New blog:</h3>
-      <div className="blogEntry">
-        Title: <input
-          className="entry"
-          value={newBlogTitle}
-          onChange={event => setNewBlogTitle(event.target.value)}
-        />
-        <br></br>
-    Author: <input
-          className="entry"
-          value={newBlogAuthor}
-          onChange={event => setNewBlogAuthor(event.target.value)}
-        />
-        <br></br>
-    URL: <input
-          className="entry"
-          value={newBlogURL}
-          onChange={event => setNewBlogURL(event.target.value)}
-        />
-        <br></br>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <div className="formDiv">
+      <form onSubmit={addBlog}>
+        <h3>New blog:</h3>
+        <div className="blogEntry">
+          Title: <input
+            id="title"
+            className="entry"
+            value={newBlogTitle}
+            onChange={handleTitleChange}
+          />
+          <br></br>
+      Author: <input
+            id="author"
+            className="entry"
+            value={newBlogAuthor}
+            onChange={handleAuthorChange}
+          />
+          <br></br>
+      URL: <input
+            id="url"
+            className="entry"
+            value={newBlogURL}
+            onChange={handleURLChange}
+          />
+          <br></br>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
   )
 }
 

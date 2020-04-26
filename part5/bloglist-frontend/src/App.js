@@ -10,9 +10,6 @@ import loginService from './services/login'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  // const [likes, setLikes] = useState([])
-
-  const [loginVisible, setLoginVisible] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -46,7 +43,7 @@ const App = () => {
     try {
       window.localStorage.removeItem('loggedNoteappUser')
 
-      blogService.setToken('user.token')
+      blogService.unsetToken()
       setUser(null)
       setUsername('')
       setPassword('')
@@ -85,40 +82,30 @@ const App = () => {
       }, 5000)
     }
   }
- 
+
   const logoutForm = () => (
-    <form onSubmit={ handleLogout }>
+    <div>
       <div>
-        <div>
-          { user.name } logged in.
-          <button type="submit" onClick={() => setLoginVisible(false)}>logout</button>
-        </div>
+        { user.name } logged in.
+        <button type="submit" onClick={handleLogout}>logout</button>
       </div>
-    </form>
+    </div>
   )
 
-  const loginForm = () => {
-    const hideWhenVisible = { display: loginVisible ? 'none' : '' }
-    const showWhenVisible = { display: loginVisible ? '' : 'none' }
-    
-    return (
-      <div>
-        <div style={hideWhenVisible}>
-          <button onClick={() => setLoginVisible(true)}>log in</button>
-        </div>
-        <div style={showWhenVisible}>
-          <LoginForm
-            username={username}
-            password={password}
-            handleUsernameChange={({ target }) => setUsername(target.value)}
-            handlePasswordChange={({ target }) => setPassword(target.value)}
-            handleLogin={handleLogin}
-          />
-          <button onClick={() => setLoginVisible(false)}>cancel</button>
-        </div>
-      </div>
-    )
-  }
+  const loginFormRef = React.createRef()
+  
+  const loginForm = () => (
+    <Togglable buttonLabel='login' ref={loginFormRef}>
+      <LoginForm
+        username={username}
+        password={password}
+        handleUsernameChange={({ target }) => setUsername(target.value)}
+        handlePasswordChange={({ target }) => setPassword(target.value)}
+        handleLogin={handleLogin}
+      />
+    </Togglable>
+  )
+
 
   const blogRows = () => (
     <div>
@@ -143,7 +130,7 @@ const App = () => {
     setInfoMessage(`blog ${response.title} by ${response.author} has been liked`)
     setTimeout(() => {
       setInfoMessage(null)
-      console.log(null)
+      // console.log(null)
     }, 3000)
   }
 

@@ -78,7 +78,7 @@ test('when like button is clicked twice, handler is called twice', () => {
   const likeButton = component.getByText('Like')
   fireEvent.click(likeButton)
   fireEvent.click(likeButton)
-  console.log(mockUpdateHandler.mock)
+  // console.log(mockUpdateHandler.mock)
 
   expect(mockUpdateHandler.mock.calls).toHaveLength(2)
 })

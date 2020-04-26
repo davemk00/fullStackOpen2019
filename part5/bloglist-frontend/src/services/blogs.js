@@ -3,6 +3,10 @@ const baseUrl = '/api/blogs'
 
 let token = null
 
+const unsetToken = newToken => {
+  token = null
+}
+
 const setToken = newToken => {
   token = `bearer ${newToken}`
 }
@@ -38,5 +42,6 @@ export default {
   create,
   update,
   setToken,
+  unsetToken,
   remove,
 }
