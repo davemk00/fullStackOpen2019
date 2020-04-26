@@ -52,3 +52,5 @@
   - 
 
 
+**Commit 15** - 5.17/5.18: bloglist end to end testing, step1/2
+  - including testing the notification is green/red

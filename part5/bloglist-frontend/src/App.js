@@ -87,7 +87,7 @@ const App = () => {
     <div>
       <div>
         { user.name } logged in.
-        <button type="submit" onClick={handleLogout}>logout</button>
+        <button type="submit" onClick={handleLogout} id="logoutButton">logout</button>
       </div>
     </div>
   )
@@ -95,7 +95,7 @@ const App = () => {
   const loginFormRef = React.createRef()
   
   const loginForm = () => (
-    <Togglable buttonLabel='login' ref={loginFormRef}>
+    <Togglable buttonLabel='login' ref={loginFormRef} id="logoutButton">
       <LoginForm
         username={username}
         password={password}
@@ -156,7 +156,7 @@ const App = () => {
   }
 
   const newBlogForm = () => (
-    <Togglable buttonLabel='new note' ref={blogFormRef}>
+    <Togglable buttonLabel='New Blog' ref={blogFormRef}>
       <BlogForm createBlog={addBlog} />
     </Togglable>
   )
