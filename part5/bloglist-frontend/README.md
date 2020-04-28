@@ -56,3 +56,6 @@
 
 **Commit 16** - 5.19/5.20: bloglist end to end testing, step3/4
   
+**Commit 17** - some changes to neaten up the cypress testing
+  - moved the login and blog cyress test create to command functions
+
