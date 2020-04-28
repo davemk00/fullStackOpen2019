@@ -128,6 +128,22 @@ describe('Blog app', function () {
         })
       })
 
+      it.only(' which are ordered from most liked at the top', function () {
+        // const nBlogs = cy.get('.blogHide').its('length')
+        // console.log(nBlogs)
+        cy.get('.blogHide').then(($nav) => {
+          for (var i = 0; i < 3; i++) {
+            cy.get($nav[i]).find('button').click()
+          }
+        })
+
+        cy.get('.numLikes').then(($numLikes) => {
+          cy.get($numLikes).invoke('text').then(($vals) => {
+            expect($vals).to.be.eq(' 12  7  3 ')
+          })
+        })
+      })
+
       it('and Blog 2 can be liked', function () {
         cy.contains('another Cypress Blog 2').parent().find('button').as('theShowButton')
         cy.get('@theShowButton').click()
@@ -162,7 +178,7 @@ describe('Blog app', function () {
           cy.login(anotherUser)
         })
 
-        it.only('can add like to Blog 1', function () {
+        it('can add like to Blog 1', function () {
           cy.contains('another Cypress Blog 2').parent().find('button').as('theShowButton')
           cy.get('@theShowButton').click()
           cy.contains('another Cypress Blog 2').parent().find('button').contains('Like').as('theLikeButton')

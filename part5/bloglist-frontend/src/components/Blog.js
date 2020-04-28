@@ -26,9 +26,10 @@ const Blog = ({
       <br/>
       {blog.url}
       <br />
-      {blog.likes} likes
-      <button onClick={handleUpdate}>Like</button>
-      <br />
+      <div className='likes'>
+        <span className='numLikes'> {blog.likes} </span> likes
+        <button onClick={handleUpdate}>Like</button>
+      </div>
       {blog.author}
       <br />
       {showRemoveButton && <button onClick={handleRemove}>Remove</button>}
