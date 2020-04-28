@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -47,3 +48,31 @@ Cypress.Commands.add('createBlog', ({ title, author, url, likes }) => {
   cy.visit('http://localhost:3000')
 })
 
+
+Cypress.Commands.add('addUser', ({ name, username, password }) => { 
+  cy.request('POST', 'http://localhost:3001/api/users', {
+    name, username, password
+  })
+})
+
+
+Cypress.Commands.add('addDummyBlogs', ({  }) => {
+  cy.createBlog({
+    title: 'another Cypress Blog 1',
+    author: 'Cypress Test',
+    url: 'test URL',
+    likes: 7
+  })
+  cy.createBlog({
+    title: 'another Cypress Blog 2',
+    author: 'Cypress Test',
+    url: 'test URL',
+    likes: 3
+  })
+  cy.createBlog({
+    title: 'another Cypress Blog 3',
+    author: 'Cypress Test',
+    url: 'test URL',
+    likes: 12
+  })
+})

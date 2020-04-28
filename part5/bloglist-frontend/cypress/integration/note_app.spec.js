@@ -96,12 +96,84 @@ describe('Blog app', function () {
           cy.get('.blogHide > button').click()
         })
 
-        it.only('a like can be added', function () {
+        it('a like can be added', function () {
           cy.contains('Like').click()
           cy.get('.Notification')
             .should('contain', 'blog another Cypress Blog by Cypress Test has been liked')
             .and('have.css', 'color', 'rgb(0, 128, 0)')
             .and('have.css', 'border-style', 'solid')
+        })
+      })
+    })
+
+    describe('and several blogs exists', function () {
+      beforeEach(function () {
+        cy.createBlog({
+          title: 'another Cypress Blog 1',
+          author: 'Cypress Test',
+          url: 'test URL',
+          likes: 7
+        })
+        cy.createBlog({
+          title: 'another Cypress Blog 2',
+          author: 'Cypress Test',
+          url: 'test URL',
+          likes: 3
+        })
+        cy.createBlog({
+          title: 'another Cypress Blog 3',
+          author: 'Cypress Test',
+          url: 'test URL',
+          likes: 12
+        })
+      })
+
+      it('and Blog 2 can be liked', function () {
+        cy.contains('another Cypress Blog 2').parent().find('button').as('theShowButton')
+        cy.get('@theShowButton').click()
+        cy.contains('another Cypress Blog 2').parent().find('button').contains('Like').as('theLikeButton')
+        cy.get('@theLikeButton').click()
+        cy.contains('another Cypress Blog 2').parent().should('contain', '4 likes')
+      })
+      it('and Blog 3 can be deleted', function () {
+        cy.contains('another Cypress Blog 3').parent().find('button').as('theShowButton')
+        cy.get('@theShowButton').click()
+        cy.contains('another Cypress Blog 3').parent().find('button').contains('Remove').as('theRemoveButton')
+        cy.get('@theRemoveButton').click()
+        cy.get('.Notification')
+          .should('contain', 'Blog another Cypress Blog 3 removed successfully')
+          .and('have.css', 'color', 'rgb(0, 128, 0)')
+          .and('have.css', 'border-style', 'solid')
+        cy.get('html').should('contain', 'another Cypress Blog 1 Cypress Test')
+        cy.get('html').should('contain', 'another Cypress Blog 2 Cypress Test')
+        cy.get('html').should('not.contain', 'another Cypress Blog 3 Cypress Test')
+      })
+
+      describe('Another logged in user', function () {
+        beforeEach(function() {
+          const anotherUser = {
+            name: 'Another Cyress Test User',
+            username: 'AnothercyTestUser',
+            password: 'AnothercyTestPass'
+          }
+          
+          cy.get('#logoutButton').click()
+          cy.addUser(anotherUser)
+          cy.login(anotherUser)
+        })
+
+        it.only('can add like to Blog 1', function () {
+          cy.contains('another Cypress Blog 2').parent().find('button').as('theShowButton')
+          cy.get('@theShowButton').click()
+          cy.contains('another Cypress Blog 2').parent().find('button').contains('Like').as('theLikeButton')
+          cy.get('@theLikeButton').click()
+          cy.contains('another Cypress Blog 2').parent().should('contain', '4 likes')
+        })
+        it('Can NOT see Remove button for Blog 2', function () {
+          cy.contains('another Cypress Blog 2').parent().find('button').as('theShowButton')
+          cy.get('@theShowButton').click()
+          cy.contains('another Cypress Blog 2').parent().as('divToCheck')
+          cy.get('@divToCheck').should('not.contain', 'Remove')
         })
       })
     })

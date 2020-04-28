@@ -59,3 +59,8 @@
 **Commit 17** - some changes to neaten up the cypress testing
   - moved the login and blog cyress test create to command functions
 
+**Commit 18** - 5.21: bloglist end to end testing, step5
+  - including testing if antoher cannot delete a blog
+
+
+
