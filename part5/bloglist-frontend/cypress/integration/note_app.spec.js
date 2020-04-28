@@ -32,7 +32,7 @@ describe('Blog app', function () {
     cy.contains('login').click()
     cy.get('#Username').type('cyTestUser')
     cy.get('#Password').type('cyTestPass')
-    cy.get('form > button').click()
+    cy.get('#login-submit').click()
     cy.contains('Cyress Test User logged in')
     cy.get('.Notification')
       .should('contain', 'cyTestUser Logged in')
@@ -46,11 +46,46 @@ describe('Blog app', function () {
     cy.contains('login').click()
     cy.get('#Username').type('cyTestUser')
     cy.get('#Password').type('WrongCyTestPass')
-    cy.get('form > button').click()
+    cy.get('#login-submit').click()
     cy.get('.Notification')
       .should('contain', 'invalid username or password')
       .and('have.css', 'color', 'rgb(255, 0, 0)')
       .and('have.css', 'border-style', 'solid')
     cy.get('html').should('not.contain', 'Cyress Test User logged in')
   })
+
+  describe('when logged in',
+    function () {
+      beforeEach(function () {
+        cy.contains('login').click()
+        cy.get('input:first').type('cyTestUser')
+        cy.get('input:last').type('cyTestPass')
+        cy.get('#login-submit').click()
+      })
+      it('a new blog can be created', function () {
+        cy.contains('New Blog').click()
+        cy.get('#title').type('a blog created by cypress')
+        cy.get('#author').type('authored by cypress')
+        cy.get('#url').type('url by cypress')
+        cy.contains('Submit').click()
+        cy.contains('a blog created by cypress')
+        cy.contains('authored by cypress')
+      })
+
+      describe('and a blog exists', function () {
+        beforeEach(function () {
+          cy.contains('New Blog').click()
+          cy.get('#title').type('another Cypress Blog')
+          cy.get('#author').type('Cypress Test')
+          cy.get('#url').type('test URL')
+          cy.contains('Submit').click()
+        })
+
+        it.only('for which a like can be added', function () {
+          cy.get('.blogHide > button').click()
+          cy.contains('Like').click()
+        })
+      })
+
+    })
 })
