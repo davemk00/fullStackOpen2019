@@ -116,7 +116,7 @@ const App = () => {
           blog={blog}
           handleUpdate={() => updateLikes(blog)}
           handleRemove={() => removeBlog(blog)}
-          showRemoveButton = {user && (user.id === blog.user.id)}
+          showRemoveButton = {(user != null) && (user.id === blog.user.id)}
         />
       )}
     </div>

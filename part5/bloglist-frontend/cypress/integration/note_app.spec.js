@@ -128,7 +128,7 @@ describe('Blog app', function () {
         })
       })
 
-      it.only(' which are ordered from most liked at the top', function () {
+      it(' which are ordered from most liked at the top', function () {
         // const nBlogs = cy.get('.blogHide').its('length')
         // console.log(nBlogs)
         cy.get('.blogHide').then(($nav) => {
@@ -149,7 +149,7 @@ describe('Blog app', function () {
         cy.get('@theShowButton').click()
         cy.contains('another Cypress Blog 2').parent().find('button').contains('Like').as('theLikeButton')
         cy.get('@theLikeButton').click()
-        cy.contains('another Cypress Blog 2').parent().should('contain', '4 likes')
+        cy.get('.numLikes').should('contain', '4')
       })
       it('and Blog 3 can be deleted', function () {
         cy.contains('another Cypress Blog 3').parent().find('button').as('theShowButton')
@@ -183,7 +183,7 @@ describe('Blog app', function () {
           cy.get('@theShowButton').click()
           cy.contains('another Cypress Blog 2').parent().find('button').contains('Like').as('theLikeButton')
           cy.get('@theLikeButton').click()
-          cy.contains('another Cypress Blog 2').parent().should('contain', '4 likes')
+          cy.get('.numLikes').should('contain', '4')
         })
         it('Can NOT see Remove button for Blog 2', function () {
           cy.contains('another Cypress Blog 2').parent().find('button').as('theShowButton')
