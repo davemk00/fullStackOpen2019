@@ -7,5 +7,16 @@
     - bad
     - zero
 
+**Commit 2** - 6.2: unicafe revisited, step2
+  - Implemented actual functionality
 
-    
+
+
+
+
+
+
+
+
+  
+   
