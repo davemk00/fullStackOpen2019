@@ -24,8 +24,11 @@
 **Commit 6** - 6.8: anecdotes, step6
   - put anecdote list render into its own component 
 
+**Commit 7** - 6.9 Better anecdotes, step7
+  - created store.js and included Redux-store
+  - loaded React dev tools
 
-
+  
 
 
   
