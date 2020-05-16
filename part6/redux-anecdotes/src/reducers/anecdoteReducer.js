@@ -24,6 +24,8 @@ const reducer = (state = initialState, action) => {
   // console.log('action', action)
 
   switch (action.type) {
+    // case 'INIT_ANECDOTES':
+    //   return action.data
     case 'NEW_ANECDOTE':
       return [...state, action.data]
     case 'VOTE':
@@ -44,5 +46,31 @@ const reducer = (state = initialState, action) => {
       return state
   }
 }
+
+// export const initialiseAnecdotes = (anecdotes) => {
+//   return {
+//     type: 'INIT_ANECDOTES',
+//     data: anecdotes,
+//   }
+// }
+
+export const addVote = (id) => {
+  return {
+    type: 'VOTE',
+    data: { id }
+  }
+}
+
+export const createAnecdote = (content) => {
+  return {
+    type: 'NEW_ANECDOTE',
+    data: {
+      content,
+      votes: 0,
+      id: generateId()
+    }
+  }
+}
+
 
 export default reducer

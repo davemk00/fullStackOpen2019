@@ -12,7 +12,11 @@
   - added sort by number of votes
   - commented some console.log lines
 
-
+**Commit 4** - 6.6: anecdotes, step4
+  - created action-objects for:
+    - new anecdotes
+    - voting
+  - tried to do the same for initialise anecdotes but didn't. How to dispatch initially?
 
 
 
