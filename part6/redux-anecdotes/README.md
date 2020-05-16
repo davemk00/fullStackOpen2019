@@ -18,6 +18,8 @@
     - voting
   - tried to do the same for initialise anecdotes but didn't. How to dispatch initially?
 
+**Commit 5** - 6.7: anecdotes, step5
+  - separated creation of new anecdotes into AnecdoteForm component
 
 
 
