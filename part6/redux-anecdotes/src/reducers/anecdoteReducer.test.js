@@ -1,16 +1,17 @@
 import deepFreeze from 'deep-freeze'
 import reducer from '../reducers/anecdoteReducer'
 
-describe('anecdote reducer', () => {
-  // test('should return a proper initial state when called with undefined state', () => {
-  //   const state = {}
-  //   const action = {
-  //     type: 'DO_NOTHING'
-  //   }
+describe('anecdote reducer', () => {  
+  test('should return a proper initial state when called with undefined state', () => {
+    const state = {}
+    const action = {
+      type: 'DO_NOTHING'
+    }
 
-  //   const newState = counterReducer(undefined, action)
-  //   expect(newState).toEqual(initialState)
-  // })
+    const newState = reducer(undefined, action)
+    // expect(newState).toEqual(initialState)
+    expect(newState.length).toBe(6)
+  })
 
   test('returns increased vote with action VOTE', () => {
     const state = [
@@ -48,5 +49,23 @@ describe('anecdote reducer', () => {
       votes: 1,
       id: 2
     })
-  })  
+  })
+
+  test('returns new state with action: NEW_ANECDOTE', () => { 
+    const state = []
+    const action = {
+      type: 'NEW_ANECDOTE',
+      data: {
+        content: 'A test anecdote for reducter test with action: NEW_ANECDOTE',
+        votes: 0,
+        id: 3
+      }
+    }
+
+    deepFreeze(state)
+    const newState = reducer(state, action)
+
+    expect(newState.length).toBe(1)
+    expect(newState).toContainEqual(action.data)
+  })
 })
