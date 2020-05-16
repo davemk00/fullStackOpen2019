@@ -8,8 +8,9 @@
   - implemented creating new note
   - create note test
 
-
-
+**Commit 3** - 6.5*: anecdotes, step3
+  - added sort by number of votes
+  - commented some console.log lines
 
 
 

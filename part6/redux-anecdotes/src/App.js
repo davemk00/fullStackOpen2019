@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { reducer } from './reducers/anecdoteReducer'
+// import { reducer } from './reducers/anecdoteReducer'
 
 const generateId = () => (100000 * Math.random()).toFixed(0)
 
@@ -23,7 +23,7 @@ const App = () => {
   }
 
   const vote = (id) => {
-    console.log('vote', id)
+    // console.log('vote', id)
     dispatch({
       type: 'VOTE',
       data: { id }
@@ -33,7 +33,9 @@ const App = () => {
   return (
     <div>
       <h2>Anecdotes</h2>
-      {anecdotes.map(anecdote =>
+      {anecdotes
+        .sort((a, b) => b.votes - a.votes)
+        .map(anecdote =>
         <div key={anecdote.id}>
           <div>
             {anecdote.content}
