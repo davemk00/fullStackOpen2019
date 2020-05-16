@@ -28,6 +28,7 @@
   - created store.js and included Redux-store
   - loaded React dev tools
 
+**Commit 8** - 6.10-6.11 Better anecdotes, step8/9
   
 
 
