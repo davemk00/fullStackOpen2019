@@ -21,7 +21,8 @@
 **Commit 5** - 6.7: anecdotes, step5
   - separated creation of new anecdotes into AnecdoteForm component
 
-
+**Commit 6** - 6.8: anecdotes, step6
+  - put anecdote list render into its own component 
 
 
 
