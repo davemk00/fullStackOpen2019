@@ -8,16 +8,6 @@ describe('unicafe reducer', () => {
     bad: 0
   }
   
-  // beforeEach(() => {
-  //   component = render(
-  //     <Togglable buttonLabel="show...">
-  //       <div className="testDiv">
-  //         <p>Testline For Testing</p>
-  //       </div>
-  //     </Togglable>
-  //   )
-  // })
-
   test('should return a proper initial state when called with undefined state', () => {
     const state = {}
     const action = {
