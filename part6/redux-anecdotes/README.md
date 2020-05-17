@@ -51,4 +51,5 @@
   - saving votes to backend
   - small changes to the reducer
 
+**Commit 17** - 6.18 Anecdotes and the backend, step6
 

@@ -1,7 +1,5 @@
 import anecdoteService from '../services/anecdotes'
 
-// const generateId = () => (100000 * Math.random()).toFixed(0)
-
 const anecdoteReducer = (state = [], action) => {
   // console.log('anecdote state now: ', state)
   // console.log('anecdote action: ', action)
