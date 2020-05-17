@@ -41,7 +41,11 @@
 **Commit 12/13** - 6.14 Anecdotes and the backend, step2
   - newly created anecdotes stored in backend
 
-**Commit 14** - 6.15 Anecdotes and the backend, step2
+**Commit 14** - 6.15 Anecdotes and the backend, step3
   - completed async initialisation of redux-store
   
-   
+**Commit 15** - 6.16 Anecdotes and the backend, step4
+  - new anecdote to happen using asynchronous action creators
+
+
+
