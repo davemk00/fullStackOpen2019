@@ -30,6 +30,7 @@
 
 **Commit 8** - 6.10-6.11 Better anecdotes, step8/9
   
+**Commit 9** - Added testing and some clogs 
 
 
   

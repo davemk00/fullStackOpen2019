@@ -12,8 +12,8 @@ const Anecdotes = () => {
     const anecdoteToMsg = anecdotes.find(n => n.id === id)
     const msg = `Voted for anecdote: (id: ${id}) '${anecdoteToMsg.content}'`
     dispatch(addVote(id))
-    dispatch(notificationAction(msg))
-    setTimeout(() => dispatch(notificationAction('')), 5000)
+    dispatch(notificationAction(msg, 'info'))
+    setTimeout(() => dispatch(notificationAction('', '')), 5000)
   }
 
   return (
