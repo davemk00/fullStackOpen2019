@@ -6,6 +6,7 @@ import { notificationAction } from '../reducers/notificationReducer'
 const Anecdotes = () => {
   const dispatch = useDispatch()
   const anecdotes = useSelector(state => state.anecdotes)
+  const filterValue = useSelector(state => state.filter)
 
   const vote = (id) => {
     // console.log('vote', id)
@@ -19,6 +20,7 @@ const Anecdotes = () => {
   return (
     <div>
       {anecdotes
+        .filter(anecdote => anecdote.content.indexOf(filterValue) > -1)
         .sort((a, b) => b.votes - a.votes)
         .map(anecdote =>
           <div key={anecdote.id}>

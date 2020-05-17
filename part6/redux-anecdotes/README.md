@@ -32,6 +32,13 @@
   
 **Commit 9** - Added testing and some clogs 
 
+**Commit 10** - 6.12* Better anecdotes, step10
+  - implemented filtering 
+
+**Commit 11** - 6.13 Anecdotes and the backend, step1
+  - backend server implemented 
+
+
 
   
    

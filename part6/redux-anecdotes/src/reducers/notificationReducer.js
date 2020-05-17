@@ -20,8 +20,8 @@ const notificationReducer = (state = initialState, action) => {
 }
 
 export const notificationAction = (message, type) => {
-  console.log(message)
-  console.log(type)
+  // console.log(message)
+  // console.log(type)
   return {
     type: 'SET_NOTIFICATION',
     notification: {
