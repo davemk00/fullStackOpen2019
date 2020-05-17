@@ -1,3 +1,5 @@
+import anecdoteService from '../services/anecdotes'
+
 // const generateId = () => (100000 * Math.random()).toFixed(0)
 
 const anecdoteReducer = (state = [], action) => {
@@ -28,10 +30,13 @@ const anecdoteReducer = (state = [], action) => {
   }
 }
 
-export const initialiseAnecdotes = (anecdotes) => {
-  return {
-    type: 'INIT_ANECDOTES',
-    data: anecdotes,
+export const initialiseAnecdotes = () => {
+  return async dispatch => {
+    const anecdotes = await anecdoteService.getAll()
+    dispatch({
+      type: 'INIT_ANECDOTES',
+      data: anecdotes,
+    })
   }
 }
 

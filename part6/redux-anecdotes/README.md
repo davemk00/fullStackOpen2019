@@ -38,9 +38,10 @@
 **Commit 11** - 6.13 Anecdotes and the backend, step1
   - backend server implemented 
 
-**Commit 12** - 6.14 Anecdotes and the backend, step2
+**Commit 12/13** - 6.14 Anecdotes and the backend, step2
   - newly created anecdotes stored in backend
 
-
+**Commit 14** - 6.15 Anecdotes and the backend, step2
+  - completed async initialisation of redux-store
   
    

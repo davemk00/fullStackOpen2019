@@ -6,7 +6,7 @@ import { notificationAction } from '../reducers/notificationReducer'
 
 const AnecdoteForm = () => {
   const dispatch = useDispatch()
-  
+
   const addAnecdote = async (event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
