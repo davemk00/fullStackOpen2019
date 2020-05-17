@@ -8,7 +8,7 @@ const Anecdotes = () => {
   const anecdotes = useSelector(state => state.anecdotes)
   const filterValue = useSelector(state => state.filter)
 
-  const vote = (id) => {
+  const vote = async (id) => {
     // console.log('vote', id)
     const anecdoteToMsg = anecdotes.find(n => n.id === id)
     const msg = `Voted for anecdote: (id: ${id}) '${anecdoteToMsg.content}'`

@@ -47,5 +47,8 @@
 **Commit 15** - 6.16 Anecdotes and the backend, step4
   - new anecdote to happen using asynchronous action creators
 
+**Commit 16** - 6.17 Anecdotes and the backend, step5
+  - saving votes to backend
+  - small changes to the reducer
 
 
