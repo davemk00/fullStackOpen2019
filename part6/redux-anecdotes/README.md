@@ -38,7 +38,7 @@
 **Commit 11** - 6.13 Anecdotes and the backend, step1
   - backend server implemented 
 
-**Commit 11** - Anecdotes and the backend, step2
+**Commit 12** - 6.14 Anecdotes and the backend, step2
   - newly created anecdotes stored in backend
 
 

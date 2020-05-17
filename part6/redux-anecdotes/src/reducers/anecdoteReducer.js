@@ -20,7 +20,7 @@ const anecdoteReducer = (state = [], action) => {
       return state.map(anecdote =>
         anecdote.id !== id ? anecdote : changedAnecdote
       )
-    case 'ZERO':
+    case 'ZERO':   // not implemented elsewhere
       console.log('Zero')
       return state
     default:

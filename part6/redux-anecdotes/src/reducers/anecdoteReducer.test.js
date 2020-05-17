@@ -3,14 +3,14 @@ import anecdoteReducer from '../reducers/anecdoteReducer'
 
 describe('anecdote reducer', () => {  
   test('should return a proper initial state when called with undefined state', () => {
-    const state = {}
+    const initialState = []
     const action = {
       type: 'DO_NOTHING'
     }
 
     const newState = anecdoteReducer(undefined, action)
-    // expect(newState).toEqual(initialState)
-    expect(newState.length).toBe(6)
+    expect(newState).toEqual(initialState)
+    expect(newState.length).toBeDefined()
   })
 
   test('returns increased vote with action VOTE', () => {
@@ -67,5 +67,21 @@ describe('anecdote reducer', () => {
 
     expect(newState.length).toBe(1)
     expect(newState).toContainEqual(action.data)
+  })
+
+  test('returns new state with action: INIT_ANECDOTES', () => { 
+    const state = []
+    const action = {
+      type: 'INIT_ANECDOTES',
+      data: {
+        content: 'A test anecdote for reducer test with action: NEW_ANECDOTE',
+        votes: 0,
+        id: 3
+      }
+    }
+
+    deepFreeze(state)
+    const newState = anecdoteReducer(state, action)
+    expect(newState).toBe(action.data)
   })
 })
