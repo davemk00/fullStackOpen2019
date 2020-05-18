@@ -63,4 +63,6 @@
     - FilterForm
     - voting
 
+**Commit 20** - 6.21 anecdotes, the grand finale
+  - fixing the notification bug
   
