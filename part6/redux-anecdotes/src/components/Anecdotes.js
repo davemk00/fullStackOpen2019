@@ -6,7 +6,7 @@ import { notificationAction } from '../reducers/notificationReducer'
 
 const Anecdotes = (props) => {
   const dispatch = useDispatch()
-  console.log(props)
+  // console.log(props)
   // const anecdotes = useSelector(state => state.anecdotes)
   const anecdotes = props.anecdotes
   const filterValue = useSelector(state => state.filter)
@@ -41,8 +41,7 @@ const Anecdotes = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  // sometimes it is useful to console log from mapStateToProps
-  console.log(state)
+  // console.log(state)
   return {
     anecdotes: state.anecdotes,
     filter: state.filter
