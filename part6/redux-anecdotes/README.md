@@ -53,3 +53,8 @@
 
 **Commit 17** - 6.18 Anecdotes and the backend, step6
 
+**Commit 18** - 6.19 anecdotes and connect, step1
+  - connect for the anecdotes component
+
+
+  
