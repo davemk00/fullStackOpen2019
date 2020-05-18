@@ -56,5 +56,11 @@
 **Commit 18** - 6.19 anecdotes and connect, step1
   - connect for the anecdotes component
 
+**Commit 19** - 6.20 anecdotes and connect, step2
+  - used connect for the remaining components:
+    - anecdoteForm
+    - notification
+    - FilterForm
+    - voting
 
   
