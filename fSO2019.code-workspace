@@ -2,10 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"name": "routed-anecdotes",
-			"path": "part7\\routed-anecdotes"
 		}
 	]
 }
