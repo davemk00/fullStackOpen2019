@@ -7,7 +7,8 @@
 **Commit 2** - 8.2: All books
 - added allBooks query
 
-
+**Commit 3** - 8.3: All authors
+- added allAuthors query
 
 
 
