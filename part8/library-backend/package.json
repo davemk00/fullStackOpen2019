@@ -1,15 +1,20 @@
 {
   "name": "library-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "**Commit 1** - 8.1: The number of books and authors\r - copy file\r - added queries for bookCount and authorCount",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.18.2",
     "graphql": "^15.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
