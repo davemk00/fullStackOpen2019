@@ -4,8 +4,8 @@
 - copy file
 - added queries for bookCount and authorCount
 
-
-
+**Commit 2** - 8.2: All books
+- added allBooks query
 
 
 
