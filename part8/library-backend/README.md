@@ -13,6 +13,9 @@
 **Commit 4** - 8.4: Books of an author
 - chnaged allBooks to return books from searched author
 
+**Commit 5** - 8.5: Books by genre
+- chnaged allBooks to return books from searched genre
+
 
 
 
