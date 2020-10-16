@@ -10,6 +10,9 @@
 **Commit 3** - 8.3: All authors
 - added allAuthors query
 
+**Commit 4** - 8.4: Books of an author
+- chnaged allBooks to return books from searched author
+
 
 
 
