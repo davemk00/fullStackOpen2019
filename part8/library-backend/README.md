@@ -19,8 +19,8 @@
 **Commit 6** - 8.6: Adding a book
 - added mutation addBook
 
-
-
+**Commit 7** - 8.7: Updating the birth year of an author
+- added editAuthor
 
   
    
