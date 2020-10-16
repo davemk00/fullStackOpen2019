@@ -16,6 +16,9 @@
 **Commit 5** - 8.5: Books by genre
 - chnaged allBooks to return books from searched genre
 
+**Commit 6** - 8.6: Adding a book
+- added mutation addBook
+
 
 
 
