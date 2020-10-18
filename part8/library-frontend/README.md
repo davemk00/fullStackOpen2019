@@ -11,4 +11,8 @@
 - implemented add book
 - moved queries
 
-   
+**Commit 11** - 8.11: Authors birth year
+- implemented add author year born
+- tried to do error, but cannae work it
+
+
