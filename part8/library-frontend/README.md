@@ -7,4 +7,8 @@
 **Commit 9** - 8.9: Books view
 - add book view
 
+**Commit 10** - 8.10: Adding a book
+- implemented add book
+- moved queries
+
    
