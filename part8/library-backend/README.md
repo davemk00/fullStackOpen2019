@@ -21,8 +21,5 @@
 
 **Commit 7** - 8.7: Updating the birth year of an author
 - added editAuthor
-
-**Commit 8** - 8.8: Authors view
-
   
    
