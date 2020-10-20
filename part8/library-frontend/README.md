@@ -15,4 +15,7 @@
 - implemented add author year born
 - tried to do error, but cannae work it
 
+**Commit 12** - 8.12: Authors birth year advanced
+- implemented select tag
+
 
