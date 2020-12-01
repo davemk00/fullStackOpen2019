@@ -18,4 +18,5 @@
 **Commit 12** - 8.12: Authors birth year advanced
 - implemented select tag
 
-
+**Commit 13** - 8.13: Database, part 1
+- most of front end works with small changes to front end and back end

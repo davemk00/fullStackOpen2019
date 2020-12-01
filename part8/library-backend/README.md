@@ -22,4 +22,10 @@
 **Commit 7** - 8.7: Updating the birth year of an author
 - added editAuthor
   
-   
+**Commit 13** - 8.13: Database, part 1
+- got it to write to mongodb
+- most of front end works with small changes to front end and back end
+
+
+
+
