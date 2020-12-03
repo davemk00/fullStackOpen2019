@@ -29,6 +29,10 @@
 **Commit 14** - 8.14: Database, part 2
 - fixed all query and mutation working with parameters
 - some error message checking
+  
+**Commit 15** - 8.15: Database, part 3
+- fixed addBook when author already exists
+- validation already done
 
 
 

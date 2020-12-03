@@ -95,7 +95,7 @@ const resolvers = {
 
 
       
-      let book = await Book.findOne({ title:args.title })
+      let book = await Book.findOne({ title:args.title }).populate('author')
       if (book === null) {
         console.log("saving new book")        
         book = new Book({ ...args, author: author })
