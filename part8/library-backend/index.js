@@ -1,13 +1,14 @@
 const { ApolloServer, gql, UserInputError } = require('apollo-server')
 const { v1: uuid } = require('uuid')
 const mongoose = require('mongoose')
+require('dotenv').config()
 const Book = require('./models/book')
 const Author = require('./models/author')
+ 
 
+const MONGODB_URI = process.env.PART8_MONGODB_URI
 
-const MONGODB_URI = 'mongodb+srv://dbUser:Dr0Pqn63vofEt6oZ@cluster0.xs4tv.mongodb.net/FSO_part8?retryWrites=true&w=majority'
-
-console.log('connecting to', MONGODB_URI)
+console.log('connecting to', MONGODB_URI) 
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
   .then(() => {
@@ -60,8 +61,12 @@ const resolvers = {
 
     allAuthors: () => Author.find({}),
 
-    allBooks: (root, args) => {
-      return Book.find({}).populate('author')
+    allBooks: async (root, args) => {
+      if (!args.author) {
+        return Book.find({}).populate('author')
+      }
+      const author = await Author.findOne({ name:args.author })
+      return Book.find({author:author}).populate('author')
     }
   },
   
@@ -103,25 +108,34 @@ const resolvers = {
             invalidArgs: args,
           })
         }
-
-
+        
+        
       } else {
         console.log("book found")
       }
-
+      
       return book
       
     },
-    editAuthor: (root, args) => {
-      const author = authors.find(p => p.name === args.name)
-      if (!author) {
-        return null
-      }
+    
 
-      const updatedAuthor = { ...author, born: args.born }
-      authors = authors.map(p => p.name === args.name ? updatedAuthor : p)
-      return updatedAuthor
+    
+    editAuthor: async (root, args) => {
+      
+      try {
+        const author = await Author.findOne({ name:args.name }) 
+        author.born = args.born
+        await author.save()
+      } catch (error) {
+        console.log('error throw 3')
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        })
+      } 
+      
+      return author
     }
+    
   }
 }
 

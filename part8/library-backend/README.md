@@ -25,6 +25,10 @@
 **Commit 13** - 8.13: Database, part 1
 - got it to write to mongodb
 - most of front end works with small changes to front end and back end
+  
+**Commit 14** - 8.14: Database, part 2
+- fixed all query and mutation working with parameters
+- some error message checking
 
 
 
