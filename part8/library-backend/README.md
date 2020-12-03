@@ -33,6 +33,10 @@
 **Commit 15** - 8.15: Database, part 3
 - fixed addBook when author already exists
 - validation already done
+  
+**Commit 16** - 8.16 user and logging in
+- backend now requires login, token, etc
+- require currentUser for addBook, editAuthor
 
 
 
