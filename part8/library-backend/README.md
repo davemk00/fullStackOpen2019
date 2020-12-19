@@ -38,6 +38,10 @@
 - backend now requires login, token, etc
 - require currentUser for addBook, editAuthor
 
+**Commit 17** - 8.17 Listing books
+- the listing of books was done earlier so in this commit:
+- I fixed the missing context from editAuthor
+
 
 
 

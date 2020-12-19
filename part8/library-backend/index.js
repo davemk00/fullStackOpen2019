@@ -147,7 +147,7 @@ const resolvers = {
     },
     
     
-    editAuthor: async (root, args) => {      
+    editAuthor: async (root, args, context) => {      
       const currentUser = context.currentUser
       
       if (!currentUser) {
@@ -157,7 +157,7 @@ const resolvers = {
       try {
         const author = await Author.findOne({ name:args.name }) 
         author.born = args.born
-        await author.save()
+        return await author.save()
       } catch (error) {
         console.log('error throw 3')
         throw new UserInputError(error.message, {
