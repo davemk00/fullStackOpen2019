@@ -8,6 +8,7 @@
 
 # testing
 /coverage
+graphQL_statements.txt
 
 # production
 /build
