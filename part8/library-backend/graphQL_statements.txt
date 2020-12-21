@@ -64,6 +64,7 @@ query {
       bookCount
     }
     published
+    genres
   }
 }
 

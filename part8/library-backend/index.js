@@ -81,11 +81,26 @@ const resolvers = {
     allAuthors: () => Author.find({}),
 
     allBooks: async (root, args) => {
-      if (!args.author) {
-        return Book.find({}).populate('author')
-      }
       const author = await Author.findOne({ name:args.author })
-      return Book.find({author:author}).populate('author')
+      const genre = args.genre
+
+      // I tried to find a smarter way to filter serverside, but gave up....\
+      if (!args.author && !args.genre) {
+        return Book.find({}).populate('author')
+      }      
+      
+      if (!args.author && args.genre) {
+        return Book.find({genres:genre}).populate('author')
+      }
+      
+      if (args.author && !args.genre) {
+        return Book.find({author:author}).populate('author')
+      }
+      
+      if (args.author && args.genre) {
+        return Book.find({genres:genre, author:author}).populate('author')
+      }
+      
     },
 
     me: (root, args, context) => {

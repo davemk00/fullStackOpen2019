@@ -62,5 +62,7 @@
 **Commit 18** - 5.21: bloglist end to end testing, step5
   - including testing if antoher cannot delete a blog
 
-
+**Commit 20** - 8.19 Books by genre, part 1
+  - added all dynamic genre buttons and 'all'
+  - updated ALL_BOOKS query to return genres
 
