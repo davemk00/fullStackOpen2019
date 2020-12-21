@@ -12,6 +12,10 @@ const AuthorEditForm = ( props ) => {
     refetchQueries: [ { query: ALL_AUTHORS } ]
   })
 
+  if (!props.show) {
+    return null
+  }
+
   const authorsSelect = props.authors.map(a => {
     return <option value={a.name} key={a.name}> {a.name} </option>
   })
@@ -20,6 +24,7 @@ const AuthorEditForm = ( props ) => {
     event.preventDefault()
     
     console.log('add author year born...')
+    if (!name) {setName(1)}
 
     editAuthor({  variables: { name, setBornTo } })
 

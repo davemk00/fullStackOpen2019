@@ -16,7 +16,6 @@ const Authors = (props) => {
   }
 
   const authors = result.data.allAuthors
-  console.log(authors)
 
   return (
     <div>
@@ -41,7 +40,14 @@ const Authors = (props) => {
           )}
         </tbody>
       </table>
-      <AuthorEditForm authors={authors}/>
+      
+      {
+        (props.token)
+        ? <AuthorEditForm authors={authors} show={(props.token)} />
+        : (null)
+      }
+      
+
     </div>
   )
 }

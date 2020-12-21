@@ -1,0 +1,74 @@
+graphQL statements
+
+
+mutation {
+  editAuthor (
+    name: "auth2"
+    born: 321
+  ) {
+    name
+    born
+  }
+}
+
+{ 
+  "Authorization": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiaWQiOiI1ZmM4NTRlMzk0MzI5ODQzNDhhNjEzNjciLCJpYXQiOjE2MDg0NDIxMjZ9.TfE6bt1h4Du22vtZVpGbschwMKXzu7oHcsxJ3eyucOE" 
+}
+
+
+
+
+mutation {
+  login (    
+    username: "user1"
+    password: "shhh"
+  ) {
+    value
+  }
+}
+
+
+
+# Write your query or mutation here
+query {
+  allAuthors {
+    name
+    born
+  }
+}
+
+
+
+mutation {
+  addBook(
+    title: "asdf",
+    author: "Reijo Mäasdfki",
+    published: 1997,
+    genres: ["crime"]
+  ) {
+    title,
+    author {
+      name
+    }
+  }
+}
+
+
+
+query {
+  allBooks {
+    title
+    author {
+      name
+      born
+      bookCount
+    }
+    published
+  }
+}
+
+
+
+
+
+

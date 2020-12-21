@@ -42,6 +42,11 @@
 - the listing of books was done earlier so in this commit:
 - I fixed the missing context from editAuthor
 
+**Commit 18** - 8.18 Log in
+- added user login
+- conditional display components
+
+
 
 
 

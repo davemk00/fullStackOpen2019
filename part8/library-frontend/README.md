@@ -20,3 +20,9 @@
 
 **Commit 13** - 8.13: Database, part 1
 - most of front end works with small changes to front end and back end
+
+**Commit 18** - 8.18 Log in
+- added user login
+- conditional display components
+
+
