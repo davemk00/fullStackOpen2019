@@ -25,4 +25,8 @@
 - added user login
 - conditional display components
 
+**Commit 21** - 8.20 Books by genre, part 2
+- filtered for recommended - using react filter
+
+
 

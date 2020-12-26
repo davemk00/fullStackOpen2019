@@ -29,6 +29,8 @@ const LoginForm = ( props ) => {
     event.preventDefault()
 
     login({ variables: { username, password } })
+    setUsername("")
+    setPassword("")
   }
 
   return (
