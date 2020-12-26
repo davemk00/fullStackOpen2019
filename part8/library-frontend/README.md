@@ -28,5 +28,6 @@
 **Commit 21** - 8.20 Books by genre, part 2
 - filtered for recommended - using react filter
 
-
+**Commit 23** - 8.24: Subscriptions - client, part 1
+- added subscription to frontendfor bookAdded, with window.alert
 
