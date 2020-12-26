@@ -49,6 +49,7 @@
 **Commit 20** - 8.19 Books by genre, part 1
   - changed query to return filtered genres (and author)
 
-
+**Commit 22** - 8.23: Subscriptions - server
+- added backend subscription
 
 
