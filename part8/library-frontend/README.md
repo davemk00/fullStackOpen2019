@@ -31,3 +31,9 @@
 **Commit 23** - 8.24: Subscriptions - client, part 1
 - added subscription to frontendfor bookAdded, with window.alert
 
+**Commit 24** - 8.25: Subscriptions - client, part 2
+- subscription now updates books page automatically
+- also did 8.21: books by genre with GraphQL  in the Books Page
+
+
+

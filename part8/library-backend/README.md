@@ -52,4 +52,10 @@
 **Commit 22** - 8.23: Subscriptions - server
 - added backend subscription
 
+**Commit 24** - 8.25: Subscriptions - client, part 2
+- subscription now updates books page automatically
+- also did 8.21: books by genre with GraphQL  in the Books Page
+
+
+
 

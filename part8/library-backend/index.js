@@ -90,6 +90,8 @@ const resolvers = {
       const author = await Author.findOne({ name:args.author })
       const genre = args.genre
 
+      console.log({genre})
+
       // I tried to find a smarter way to filter serverside, but gave up....\
       if (!args.author && !args.genre) {
         return Book.find({}).populate('author')
@@ -131,10 +133,10 @@ const resolvers = {
           await author.save()
           pubsub.publish("AUTHOR_ADDED", { authorAdded: author })
         } catch (error) {
-          console.log('error throw 1')
-          throw new UserInputError(error.message, {
-            invalidArgs: args,
-          })
+          console.log(`Add Author error::  ${error.message}`)
+          // throw new UserInputError(error.message, {
+          //   invalidArgs: args,
+          // })
         }
         
         
@@ -142,9 +144,6 @@ const resolvers = {
         console.log("author found")
       }
 
-
-
-      
       let book = await Book.findOne({ title:args.title }).populate('author')
       if (book === null) {
         console.log("saving new book")        
@@ -178,13 +177,14 @@ const resolvers = {
         throw new AuthenticationError("not authenticated")
       }
       
+      const author = await Author.findOne({ name:args.name }) 
+      
       try {
-        const author = await Author.findOne({ name:args.name }) 
         author.born = args.setBornTo
         await author.save()
         pubsub.publish("AUTHOR_EDITED", { authorAdded: author })
       } catch (error) {
-        console.log('error throw 3')
+        console.log('Error editing Author year born')
         throw new UserInputError(error.message, {
           invalidArgs: args,
         })

@@ -1,5 +1,5 @@
   
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { ALL_AUTHORS, EDIT_AUTHOR } from './queries'
 
@@ -12,6 +12,18 @@ const AuthorEditForm = ( props ) => {
     refetchQueries: [ { query: ALL_AUTHORS } ]
   })
 
+  useEffect(() => {
+    setName(props.authors[0].name)
+  }, [props.authors])
+
+  const handleAuthorChange = (event) => {
+    setName(event.target.value)
+  }
+
+  const handleBornChange = (event) => {
+    setSetBornTo(event.target.valueAsNumber)
+  }
+
   if (!props.show) {
     return null
   }
@@ -22,9 +34,11 @@ const AuthorEditForm = ( props ) => {
 
   const submit = async (event) => {
     event.preventDefault()
+    console.log(props.authors[0].name)
     
     console.log('add author year born...')
-    if (!name) {setName(1)}
+    if (!name) {setName(props.authors[0].name)}
+    console.log(name)
 
     editAuthor({  variables: { name, setBornTo } })
 
@@ -38,7 +52,7 @@ const AuthorEditForm = ( props ) => {
         <h3>Set birthyear</h3>
         <div>
           author select
-          <select value={name} onChange={({ target }) => setName(target.value)}> 
+          <select onChange={handleAuthorChange}> 
             {authorsSelect}
           </select>
         </div>
@@ -47,7 +61,7 @@ const AuthorEditForm = ( props ) => {
           <input
             type='number'
             value={setBornTo}
-            onChange={({ target }) => setSetBornTo(target.valueAsNumber)}
+            onChange={handleBornChange}
           />
         </div>
         <button type='submit'>update author</button>
