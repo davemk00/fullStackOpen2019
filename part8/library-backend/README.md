@@ -56,6 +56,15 @@
 - subscription now updates books page automatically
 - also did 8.21: books by genre with GraphQL  in the Books Page
 
+**Commit 24** - 8.25: Subscriptions - client, part 2
+- subscription now updates books page automatically
+- also did 8.21: books by genre with GraphQL  in the Books Page
 
+**Commit 25** - 8.26: n+1
+- solved by saving book IDs to Author object
+- and updating Author.bookCount
+- Some things that I should have done:
+ -- get Subscription to work when filtering 
+ -- get Subscription to work On Authors page, when another author or bookd added 
 
 

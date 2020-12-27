@@ -6,6 +6,7 @@ const Book = require('./models/book')
 const Author = require('./models/author')
 const User = require('./models/user')
 const jwt = require('jsonwebtoken')
+const author = require('./models/author')
 const pubsub = new PubSub()
 
 const JWT_SECRET = process.env.JWT_SECRET
@@ -28,6 +29,7 @@ const typeDefs = gql`
     id: ID!
     born: Int
     bookCount: Int
+    books: [Book!]!
   } 
   type Book {
     title: String!
@@ -84,13 +86,11 @@ const resolvers = {
 
     bookCount: () => Book.collection.countDocuments(),
 
-    allAuthors: () => Author.find({}),
+    allAuthors: () => Author.find({}).populate('books'),
 
     allBooks: async (root, args) => {
       const author = await Author.findOne({ name:args.author })
       const genre = args.genre
-
-      console.log({genre})
 
       // I tried to find a smarter way to filter serverside, but gave up....\
       if (!args.author && !args.genre) {
@@ -120,6 +120,7 @@ const resolvers = {
     addBook: async (root, args, context) => {
       let author = await Author.findOne({ name:args.author })
       const currentUser = context.currentUser
+      // console.log({args})
       
       if (!currentUser) {
         throw new AuthenticationError("not authenticated")
@@ -163,7 +164,12 @@ const resolvers = {
       } else {
         console.log("book found")
       }
-      
+
+      // write Book.ID to Author.books
+      author.books.push(book.id)
+      author.bookCount = author.books.length
+      await author.save()
+
       return book
       
     },
@@ -171,7 +177,6 @@ const resolvers = {
     
     editAuthor: async (root, args, context) => {      
       const currentUser = context.currentUser
-      console.log(args)
       
       if (!currentUser) {
         throw new AuthenticationError("not authenticated")
