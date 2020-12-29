@@ -35,5 +35,7 @@
 - subscription now updates books page automatically
 - also did 8.21: books by genre with GraphQL  in the Books Page
 
-
+**Commit 25** - 8.21 books by genre with GraphQL
+- got the recommendations page to filter by query
+- the books oage filter by query was done in a previous commit
 

@@ -9,7 +9,7 @@ import { useApolloClient, useSubscription } from '@apollo/client'
 import { BOOK_ADDED, ALL_BOOKS } from './components/queries'
 
 const App = () => {
-  const [page, setPage] = useState('add')
+  const [page, setPage] = useState('recommended')
   const [token, setToken] = useState(null)
   const client = useApolloClient()
 
@@ -20,8 +20,11 @@ const App = () => {
     setPage('authors')
   }
 
+  let cacheTrigger = []
+
   const updateCacheWith = (addedBook) => {
     const includedIn = (set, object) => set.map(a => a.id).includes(object.id)
+    console.log('updatingCache')
 
     const dataInStore = client.readQuery({ query: ALL_BOOKS, variables: { genre: '' } })
     if (!includedIn(dataInStore.allBooks, addedBook)) {
@@ -29,7 +32,8 @@ const App = () => {
         query: ALL_BOOKS, variables: { genre: '' },
         data: { allBooks : dataInStore.allBooks.concat(addedBook) }
       })
-    }   
+    }
+    cacheTrigger = new Set()
   }
 
   useSubscription(BOOK_ADDED, {
@@ -45,6 +49,8 @@ const App = () => {
       <div>
         <button onClick={() => setPage('authors')}>authors</button>
         <button onClick={() => setPage('books')}>books</button>
+        <button onClick={() => setPage('add')}>add book</button>
+        <button onClick={() => setPage('recommended')}>recommended</button>        
         
         { ( !token ) 
         ? (
@@ -54,8 +60,8 @@ const App = () => {
           )
           : ( 
             <>
-              <button onClick={() => setPage('add')}>add book</button>
-              <button onClick={() => setPage('recommended')}>recommended</button>
+              {/* <button onClick={() => setPage('add')}>add book</button>
+              <button onClick={() => setPage('recommended')}>recommended</button> */}
               <button onClick={logout} >logout</button> 
             </>
           )
@@ -69,6 +75,7 @@ const App = () => {
 
       <Books
         show={page === 'books' || page === 'add' }
+        cacheTrigger={cacheTrigger}
       />
 
       <RecommendedBooks

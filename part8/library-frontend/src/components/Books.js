@@ -13,7 +13,7 @@ const Books = (props) => {
       if (data && data.allBooks) {
         setBooks(data.allBooks)
       }
-  }, [data, filter, getBooks])
+  }, [data, filter])
 
   if (error) return `Error! ${error}`;
 
