@@ -9,7 +9,7 @@ import { useApolloClient, useSubscription } from '@apollo/client'
 import { BOOK_ADDED, ALL_BOOKS } from './components/queries'
 
 const App = () => {
-  const [page, setPage] = useState('recommended')
+  const [page, setPage] = useState('books')
   const [token, setToken] = useState(null)
   const client = useApolloClient()
 
@@ -39,7 +39,7 @@ const App = () => {
   useSubscription(BOOK_ADDED, {
     onSubscriptionData: ({ subscriptionData }) => {
       const addedBook = subscriptionData.data.bookAdded
-      // window.alert(`Book: ${addedBook} added!`)
+      window.alert(`Book: ${addedBook} added!`)
       updateCacheWith(addedBook)
     }
   })
@@ -49,8 +49,6 @@ const App = () => {
       <div>
         <button onClick={() => setPage('authors')}>authors</button>
         <button onClick={() => setPage('books')}>books</button>
-        <button onClick={() => setPage('add')}>add book</button>
-        <button onClick={() => setPage('recommended')}>recommended</button>        
         
         { ( !token ) 
         ? (
@@ -60,8 +58,8 @@ const App = () => {
           )
           : ( 
             <>
-              {/* <button onClick={() => setPage('add')}>add book</button>
-              <button onClick={() => setPage('recommended')}>recommended</button> */}
+              <button onClick={() => setPage('add')}>add book</button>
+              <button onClick={() => setPage('recommended')}>recommended</button>
               <button onClick={logout} >logout</button> 
             </>
           )
